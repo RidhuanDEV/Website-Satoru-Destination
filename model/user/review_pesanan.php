@@ -9,8 +9,9 @@ include '../../controller/koneksi.php';
 // Mengambil ID wisata dari URL
 $id_wisata = $_GET['id_wisata'];
 $id = $_GET['id'];
+
 // Mengambil data wisata berdasarkan ID
-$sql = "SELECT tbl_wisata.nama, tbl_wisata.deskripsi, product.harga
+$sql = "SELECT tbl_wisata.nama, tbl_wisata.deskripsi,tbl_wisata.diskon, product.harga
         FROM tbl_wisata 
         JOIN product ON tbl_wisata.id = product.id_wisata 
         WHERE tbl_wisata.id = $id_wisata";
@@ -21,7 +22,12 @@ if ($result->num_rows > 0) {
     echo "Data tidak ditemukan";
     exit();
 }
-
+// Menghitung harga setelah diskon jika diskon = true
+if ($row["diskon"] == 'true') {
+    $discounted_price = $row["harga"] * 0.8;
+} else {
+    $discounted_price = $row["harga"];
+}
 $sql = "SELECT * FROM test_wisata WHERE id_transaksi = $id and id_users = " . $_SESSION['user_id'];
 $results = $conn->query($sql);
 if ($results->num_rows > 0) {
@@ -30,6 +36,7 @@ if ($results->num_rows > 0) {
     echo "Data tidak ditemukan";
     exit();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +44,7 @@ if ($results->num_rows > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transaksi - Pesan Tiket</title>
+    <title>Review Pesanan - Pesan Tiket</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
         .form-container {
@@ -70,50 +77,48 @@ if ($results->num_rows > 0) {
             font-weight: bold;
         }
     </style>
-    <script>
-        function hitungTotalPembayaran() {
-            var hargaTiket = <?php echo $row['harga']; ?>;
-            var hari = document.getElementById('hari').value;
-            var peserta = document.getElementById('peserta').value;
-            var total = hargaTiket * hari * peserta;
-            document.getElementById('totalPembayaran').innerText = 'Total Pembayaran: Rp ' + total.toLocaleString('id-ID');
-        }
-    </script>
+    <script src="../../controller/hitungTotal.js"></script>
 </head>
 <body>
     <div class="container">
         <div class="form-container">
             <h1>Pesan Tiket: <?php echo $row['nama']; ?></h1>
             <p><?php echo $row['deskripsi']; ?></p>
-            <p>Harga Tiket: Rp <?php echo number_format($row['harga'], 2, ',', '.'); ?></p>
+            <p>Harga Tiket: Rp <?php echo number_format($discounted_price, 2, ',', '.'); ?></p>
 
             <form action="../../controller/update_transaksi.php" method="post">
                 <input type="hidden" name="id_transaksi" value="<?php echo $rows['id_transaksi']; ?>">
-                <input type="hidden" name="id_wisata" value="<?php echo $id_wisata; ?>">
+                <input type="hidden" name="id_wisata" value="<?php echo $rows['id_wisata']; ?>">
+                <input type="hidden" id="hargaTiket" value="<?php echo $discounted_price; ?>" data-discount="<?php echo $row['diskon']; ?>">
                 <div class="mb-3">
                     <label for="pelayanan" class="form-label">Pelayanan</label>
-                    <select class="form-select" id="pelayanan" name="pelayanan">
-                        <option value="Standar">Standar</option>
-                        <option value="VIP">VIP</option>
+                    <select class="form-select" id="pelayanan" name="pelayanan" onchange="hitungTotalPembayaran()">
+                        <option value="Standar" <?php echo $rows['pelayanan'] == 'Standar' ? 'selected' : ''; ?>>Standar</option>
+                        <option value="VIP" <?php echo $rows['pelayanan'] == 'VIP' ? 'selected' : ''; ?>>VIP</option>
                     </select>
                 </div>
                 <div class="mb-3">
                     <label for="hari" class="form-label">Berapa Hari</label>
-                    <input type="number" class="form-control" id="hari" name="hari" value="<?php echo $rows['hari']; ?>" required oninput="hitungTotalPembayaran()">
+                    <input type="number" class="form-control" id="hari" name="hari" min="1" required value="<?php echo $rows['hari']; ?>" oninput="hitungTotalPembayaran()">
                 </div>
                 <div class="mb-3">
                     <label for="peserta" class="form-label">Jumlah Peserta</label>
-                    <input type="number" class="form-control" id="peserta" name="peserta" value="<?php echo $rows['peserta']; ?>" required oninput="hitungTotalPembayaran()">
+                    <input type="number" class="form-control" id="peserta" name="peserta" min="1" required value="<?php echo $rows['peserta']; ?>" oninput="hitungTotalPembayaran()">
                 </div>
                 <div class="mb-3">
-                    <p id="totalPembayaran" class="total-pembayaran">Total Pembayaran: Rp. 0</p>
+                    <p id="totalPembayaran" class="total-pembayaran">Total Pembayaran: Rp <?php echo number_format($rows['total_pembayaran'], 2, ',', '.'); ?></p>
                 </div>
-                <button type="submit" class="btn btn-primary">Update Pesanan</button>
-                <a href="pesanan.php" class="btn btn-danger">Cancel</a>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a href="product.php" class="btn btn-danger">Cancel</a>
             </form>
         </div>
     </div>
 
+    <script>
+        window.onload = function() {
+            hitungTotalPembayaran();
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

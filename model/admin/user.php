@@ -7,7 +7,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <title>Frontendfunn - Bootstrap 5 Admin Dashboard Template</title>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <title>Admin Satoru</title>
 </head>
 <body>
   <!-- top navigation bar -->
@@ -29,13 +30,13 @@
       <nav class="navbar-dark">
         <ul class="navbar-nav">
           <li>
-            <a href="index.php" class="nav-link px-3 active">
+            <a href="index.php" class="nav-link px-3">
               <span class="me-2"><i class="bi bi-speedometer2"></i></span>
               <span>Dashboard</span>
             </a>
           </li>
           <li>
-            <a href="user.php" class="nav-link px-3">
+            <a href="user.php" class="nav-link px-3 active">
               <span class="me-2"><i class="bi bi-person"></i></span>
               <span>Users</span>
             </a>
@@ -62,46 +63,55 @@
       </nav>
     </div>
   </div>
-  <!-- offcanvas -->
-  <div class="container d-flex">
-  <div style="width:   250px;height:fit-content"></div>
-  <!-- Dashboard content -->
-  <div class="container mt-5 pt-3">
-    <div class="row">
-      <!-- Card for Users -->
-      <div class="col-md-4 mb-4">
-        <div class="card text-white bg-primary">
-          <div class="card-body">
-            <h5 class="card-title">Total Users</h5>
-            <p class="card-text">Jumlah total pengguna.</p>
-            <a href="users.php" class="btn btn-light">Lihat Detail</a>
-          </div>
-        </div>
+  <!--akhir offcanvas -->
+  <!-- Data User -->
+   <div class="container d-flex">
+      <div style="width: 250px;height:fit-content">
+
       </div>
-      <!-- Card for Products -->
-      <div class="col-md-4 mb-4">
-        <div class="card text-white bg-success">
-          <div class="card-body">
-            <h5 class="card-title">Total Products</h5>
-            <p class="card-text">Jumlah total produk.</p>
-            <a href="products.php" class="btn btn-light">Lihat Detail</a>
-          </div>
-        </div>
+      
+      <div class="container mt-5 pt-3">
+        <h1 class="mb-4">Data User</h1>
+        <a href="create_user.php" class="btn btn-primary mb-3">Create Data</a>
+        <table id="userTable" class="display">
+          <thead>
+            <tr>
+              <th>Nama</th>
+              <th>Email</th>
+              <th>Password</th>
+              <th>Edit User</th>
+              <th>Hapus User</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John Doe</td>
+              <td>john.doe@example.com</td>
+              <td>******</td>
+              <td>
+                <a href="update_user.php?id=1" class="btn btn-warning btn-sm">Update</a>
+                
+              </td>
+              <td>
+             
+                <a href="delete_user.php?id=1" class="btn btn-danger btn-sm">Delete</a>
+              </td>
+            </tr>
+           
+          </tbody>
+        </table>
       </div>
-      <!-- Card for Tickets -->
-      <div class="col-md-4 mb-4">
-        <div class="card text-white bg-warning">
-          <div class="card-body">
-            <h5 class="card-title">Total Tiket Wisata</h5>
-            <p class="card-text">Jumlah total tiket wisata.</p>
-            <a href="tickets.php" class="btn btn-dark">Lihat Detail</a>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
-  <!-- End of Dashboard content -->
-  </div>
+  <!--akhir Data User -->
+    <!-- JavaScript libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#userTable').DataTable();
+    });
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($result->num_rows > 0) {
         // Admin login successful
         $_SESSION['admin'] = 'admin';
-        header("Location: admin_dashboard.php");
+        header("Location: ../model/admin/index.php");
     } else {
         echo "Invalid username or password";
     }

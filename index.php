@@ -117,49 +117,113 @@
     </div>
   </div>
   <!-- akhir contoh wisata -->
-  <!-- wisata terpopuler -->
-  <div class="col-sm-12">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
-          <h1 class="text-center mt-5">Wisata Terpopuler</h1>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-4">
-          <div class="card mt-3">
-            <img src="view/assets/wisata1.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">WISATA 1</h5>
-              <p class="card-text">Deskripsi Wisata 1</p>
-              <a href="#" class="btn btn-primary">Detail</a>
+   <!-- query mengambil data wisata terbaru -->
+    <?php
+      include 'controller/koneksi.php'; 
+      $sql = "
+          (SELECT tbl_wisata.foto, tbl_wisata.id, tbl_wisata.nama, tbl_wisata.deskripsi, tbl_wisata.diskon, product.harga
+          FROM tbl_wisata
+          JOIN product ON tbl_wisata.id = product.id_wisata
+          ORDER BY tbl_wisata.id ASC
+          LIMIT 3)
+          UNION ALL
+          (SELECT tbl_wisata.foto, tbl_wisata.id, tbl_wisata.nama, tbl_wisata.deskripsi, tbl_wisata.diskon, product.harga
+          FROM tbl_wisata
+          JOIN product ON tbl_wisata.id = product.id_wisata
+          ORDER BY tbl_wisata.id DESC
+          LIMIT 3)
+      ";
+
+      $result = $conn->query($sql);
+      
+      $wisata = [];
+      if ($result->num_rows > 0) {
+          while ($row = $result->fetch_assoc()) {
+            if ($row["diskon"] == 'true') {
+                $discounted_price = $row["harga"] * 0.8;
+                $original_price = number_format($row["harga"], 0, ',', '.');
+                $discount_label = '<span class="badge bg-success">Discount 20%</span>';
+            } else {
+                $discounted_price = $row["harga"];
+                $original_price = '';
+                $discount_label = '';
+            }
+                $wisata[] = $row;
+          }
+      }
+
+      $conn->close();
+    ?>
+    <!-- wisata terpopuler -->
+    <div class="col-sm-12">
+        <div class="container">
+            <div class="row ">
+                <div class="col-sm-12">
+                    <h1 class="text-center mt-5">Wisata Terpopuler</h1>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="card mt-3">
-            <img src="view/assets/wisata2.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">WISATA 2</h5>
-              <p class="card-text">Deskripsi Wisata 2</p>
-              <a href="#" class="btn btn-primary">Detail</a>
+            <div class="row rounded border p-2">
+                <?php
+                    for ($i = 0; $i < 3; $i++) {
+                      if (isset($wisata[$i])) {
+                          $nama = $wisata[$i]['nama'];
+                          $deskripsi = $wisata[$i]['deskripsi'];
+                          $foto =  $wisata[$i]["foto"];
+                      } else {
+                          $nama = "Coming Soon";
+                          $deskripsi = "";
+                          $foto = "view/assets/coming_soon.jpg"; // Gambar placeholder
+                      }
+                      echo '
+                      
+                          <div class="col-sm-4">
+                              <div class="card mt-3">
+                                  <img src="view/produk/' . $foto . '" class="img-fluid" style="object-fit: cover;height: 300px;" alt="...">
+                              </div>
+                              <div class="col-md-8 d-flex">
+                                  <div class="card-body d-flex flex-column justify-content-between">
+                                      <div class="d-md-block">
+                                          <h5 class="card-title">' . $nama . '</h5>
+                                          <p class="card-text">' . $deskripsi . '</p>
+                                      </div>
+                                      <div class="d-md-block">';
+                      
+                                    if ($wisata[$i]["diskon"] == 'true') {
+                                        echo '
+                                        <p class="card-text">
+                                            <small class="text-body-secondary">
+                                                <s>Rp.' . $original_price . '</s>
+                                            </small>
+                                        </p>
+                                        <p class="card-text">
+                                            <small class="text-body-secondary text-danger">
+                                                Rp.' . $discounted_price . '
+                                            </small> ' . $discount_label . '
+                                        </p>';
+                                    } else {
+                                        echo '
+                                        <p class="card-text">
+                                            <small class="text-body-secondary">
+                                                Rp.' . $discounted_price . '
+                                            </small>
+                                        </p>';
+                                    }
+                                        echo '
+                                        <a href="model/user/transaksi.php?id_wisata=' . $wisata[$i]['id'] . '" class="btn btn-primary">
+                                            Pesan Tiket Wisata
+                                        </a>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      ';
+                    } 
+                
+                ?>
             </div>
-          </div>
         </div>
-        <div class="col-sm-4">
-          <div class="card mt-3">
-            <img src="view/assets/wisata3.webp" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">WISATA 3</h5>
-              <p class="card-text">Deskripsi Wisata 3</p>
-              <a href="#" class="btn btn-primary">Detail</a>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-  <!-- akhir wisata terpopuler -->
+    <!-- akhir wisata terpopuler -->
   <!-- wisata terbaru -->
   <div class="col-sm-12">
     <div class="container">
@@ -168,44 +232,71 @@
           <h1 class="text-center mt-5">Wisata Terbaru</h1>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm-4">
-          <div class="card mt-3">
-            <img src="view/assets/wisata1.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">WISATA 1</h5>
-              <p class="card-text">Deskripsi Wisata 1</p>
-              <a href="#" class="btn btn-primary">Detail</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="card mt-3">
-            <img src="view/assets/wisata2.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">WISATA 2</h5>
-              <p class="card-text">Deskripsi Wisata 2</p>
-              <a href="#" class="btn btn-primary">Detail</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="card mt-3">
-            <img src="view/assets/wisata3.webp" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">WISATA 3</h5>
-              <p class="card-text">Deskripsi Wisata 3</p>
-              <a href="#" class="btn btn-primary">Detail</a>
-            </div>
-          </div>
-        </div>
+      <div class="row rounded border p-2">
+      <?php
+        for ($i = 3; $i < 6; $i++) {
+          if (isset($wisata[$i])) {
+              $nama = $wisata[$i]['nama'];
+              $deskripsi = $wisata[$i]['deskripsi'];
+              $foto =  $wisata[$i]["foto"];
+          } else {
+              $nama = "Coming Soon";
+              $deskripsi = "";
+              $foto = "view/assets/coming_soon.jpg"; // Gambar placeholder
+          }
+          echo '
+                          
+              <div class="col-sm-4">
+                  <div class="card mt-3">
+                      <img src="view/produk/' . $foto . '" class="img-fluid" style="object-fit: cover;height: 300px;" alt="...">
+                  </div>
+                  <div class="col-md-8 d-flex">
+                      <div class="card-body d-flex flex-column justify-content-between">
+                          <div class="d-md-block">
+                              <h5 class="card-title">' . $nama . '</h5>
+                              <p class="card-text">' . $deskripsi . '</p>
+                          </div>
+                          <div class="d-md-block">';
+          
+                        if ($wisata[$i]["diskon"] == 'true') {
+                            echo '
+                            <p class="card-text">
+                                <small class="text-body-secondary">
+                                    <s>Rp.' . $original_price . '</s>
+                                </small>
+                            </p>
+                            <p class="card-text">
+                                <small class="text-body-secondary text-danger">
+                                    Rp.' . $discounted_price . '
+                                </small> ' . $discount_label . '
+                            </p>';
+                        } else {
+                            echo '
+                            <p class="card-text">
+                                <small class="text-body-secondary">
+                                    Rp.' . $discounted_price . '
+                                </small>
+                            </p>';
+                        }
+                            echo '
+                            <a href="model/user/transaksi.php?id_wisata=' . $wisata[$i]['id'] . '" class="btn btn-primary">
+                                Pesan Tiket Wisata
+                            </a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          ';
+        }
+
+      ?>
       </div>
     </div>
   </div>
   <!-- akhir wisata terbaru -->
   <!-- View All Product -->
-  <div class="col-sm-12 text-center">
-    <a class="btn btn-primary p-2" href="model/user/product.php" role="button">Lihat Semua Wisata</a>
+  <div class="col-sm-12 text-center mt-4">
+    <a class="btn btn-outline-info btn-lg p-2" href="model/user/product.php" role="button">Lihat Semua Wisata</a>
   </div>
   <!-- akhir View All Product -->
   <!-- Video Cuplikan Wisata -->

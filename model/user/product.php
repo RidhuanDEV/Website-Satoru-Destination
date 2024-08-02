@@ -91,44 +91,82 @@
         </div>
     </div>
     <div class="container w-100 overflow-auto border border-2 g-4 d-flex flex-wrap justify-content-between" style="height: 1000px;">
-        <?php
-        include '../../controller/koneksi.php';
-        // Mengambil data dari tabel tbl_wisata
-        $sql = "SELECT tbl_wisata.id, tbl_wisata.nama, tbl_wisata.deskripsi, product.harga 
-                FROM tbl_wisata 
-                JOIN product ON tbl_wisata.id = product.id_wisata   ";
-        $result = $conn->query($sql);
+    <?php
+      include '../../controller/koneksi.php';
 
-        if ($result->num_rows > 0) {
-            // Output data dari setiap baris
-            while($row = $result->fetch_assoc()) {
-                echo '<div class="card mb-3 flex-grow-1 mt-3 card-height-250" style="max-width: 600px;">';
-                echo '    <div class="row g-0 h-100">';
-                echo '        <div class="col-md-4">';
-                echo '            <img src="../../view/assets/wisata1.jpg" class="img-fluid h-100" style="object-fit: cover;" alt="...">';
-                echo '        </div>';
-                echo '        <div class="col-md-8 d-flex">';
-                echo '            <div class="card-body d-flex flex-column justify-content-between">';
-                echo '                <div class="d-md-block">';
-                echo '                    <h5 class="card-title">' . $row["nama"] . '</h5>';
-                echo '                    <p class="card-text">' . $row["deskripsi"] . '</p>';
-                echo '                </div>';
-                echo '                <div class="d-md-block">';
-                echo '                    <p class="card-text"><small class="text-body-secondary">' . 'Rp.'. $row["harga"] . '</small></p>';
-                echo '                    <a href="transaksi.php?id_wisata=' . $row["id"] . '" class="btn btn-primary">Pesan Tiket Wisata</a>';
-                echo '                </div>';
-                echo '            </div>';
-                echo '        </div>';
-                echo '    </div>';
-                echo '</div>';
-            }
-        } else {
-            echo "0 results";
+      // Mengambil data dari tabel tbl_wisata
+      $sql = "SELECT tbl_wisata.foto, tbl_wisata.id, tbl_wisata.nama, tbl_wisata.deskripsi, tbl_wisata.diskon, product.harga 
+              FROM tbl_wisata 
+              JOIN product ON tbl_wisata.id = product.id_wisata";
+      $result = $conn->query($sql);
+
+      if ($result->num_rows > 0) {
+          // Output data dari setiap baris
+          while($row = $result->fetch_assoc()) {
+              // Menghitung harga setelah diskon jika diskon = true
+              if ($row["diskon"] == 'true') {
+                  $discounted_price = $row["harga"] * 0.8;
+                  $original_price = number_format($row["harga"], 0, ',', '.');
+                  $discount_label = '<span class="badge bg-success">Discount 20%</span>';
+              } else {
+                  $discounted_price = $row["harga"];
+                  $original_price = '';
+                  $discount_label = '';
+              }
+              
+              echo '
+              <div class="card mb-3 flex-grow-1 mt-3 card-height-250" style="max-width: 600px;">
+                  <div class="row g-0 h-100">
+                      <div class="col-md-4">
+                          <img src="../../view/produk/' . $row['foto'] . '" class="img-fluid h-100" style="object-fit: cover;" alt="...">
+                      </div>
+                      <div class="col-md-8 d-flex">
+                          <div class="card-body d-flex flex-column justify-content-between">
+                              <div class="d-md-block">
+                                  <h5 class="card-title">' . $row['nama'] . '</h5>
+                                  <p class="card-text">' . $row['deskripsi'] . '</p>
+                              </div>
+                              <div class="d-md-block">';
+              
+                            if ($row["diskon"] == 'true') {
+                                echo '
+                                <p class="card-text">
+                                    <small class="text-body-secondary">
+                                        <s>Rp.' . $original_price . '</s>
+                                    </small>
+                                </p>
+                                <p class="card-text">
+                                    <small class="text-body-secondary text-danger">
+                                        Rp.' . $discounted_price . '
+                                    </small> ' . $discount_label . '
+                                </p>';
+                            } else {
+                                echo '
+                                <p class="card-text">
+                                    <small class="text-body-secondary">
+                                        Rp.' . $discounted_price . '
+                                    </small>
+                                </p>';
+                            }
+                                echo '
+                                <a href="transaksi.php?id_wisata=' . $row['id'] . '" class="btn btn-primary">
+                                    Pesan Tiket Wisata
+                                </a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>';
+          } 
+      } else {
+          echo "0 results";
         }
+          
 
-        // Menutup koneksi
-        $conn->close();
-        ?>
+      // Menutup koneksi
+      $conn->close();
+      ?>
+
     </div>
       <!-- Footer -->
   <footer class="bg-dark text-center text-white mt-5">

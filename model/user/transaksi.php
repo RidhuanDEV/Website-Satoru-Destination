@@ -10,12 +10,19 @@ include '../../controller/koneksi.php';
 $id_wisata = $_GET['id_wisata'];
 
 // Mengambil data wisata berdasarkan ID
-$sql = "SELECT tbl_wisata.nama, tbl_wisata.deskripsi, product.harga
+$sql = "SELECT tbl_wisata.nama, tbl_wisata.deskripsi, tbl_wisata.diskon, product.harga
         FROM tbl_wisata 
         JOIN product ON tbl_wisata.id = product.id_wisata 
         WHERE tbl_wisata.id = $id_wisata";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
+
+// Menghitung harga setelah diskon jika diskon = true
+if ($row["diskon"] == 'true') {
+    $discounted_price = $row["harga"] * 0.8;
+} else {
+    $discounted_price = $row["harga"];
+}
 ?>
 
 <!DOCTYPE html>
@@ -56,39 +63,32 @@ $row = $result->fetch_assoc();
             font-weight: bold;
         }
     </style>
-    <script>
-        function hitungTotalPembayaran() {
-            var hargaTiket = <?php echo $row['harga']; ?>;
-            var hari = document.getElementById('hari').value;
-            var peserta = document.getElementById('peserta').value;
-            var total = hargaTiket * hari * peserta;
-            document.getElementById('totalPembayaran').innerText = 'Total Pembayaran: Rp ' + total.toLocaleString('id-ID');
-        }
-    </script>
+    <script src="../../controller/hitungTotal.js"></script>
 </head>
 <body>
     <div class="container">
         <div class="form-container">
             <h1>Pesan Tiket: <?php echo $row['nama']; ?></h1>
             <p><?php echo $row['deskripsi']; ?></p>
-            <p>Harga Tiket: Rp <?php echo number_format($row['harga'], 2, ',', '.'); ?></p>
+            <p>Harga Tiket: Rp <?php echo number_format($discounted_price, 2, ',', '.'); ?></p>
 
-            <form action="../../controller/proses_transaksi.php" method="post">
-                <input type="hidden" name="id_wisata" value="<?php echo $id_wisata; ?>">
+            <form action="../../controller/proses_transaksi.php" method="post" onsubmit="return validateForm()">
+                <input type="hidden" id="hargaTiket" name="hargaTiket" value="<?php echo $row['harga']; ?>" data-discount="<?php echo $row['diskon']; ?>">
+                <input type="hidden" id="id_wisata" name="id_wisata" value="<?php echo $id_wisata; ?>">
                 <div class="mb-3">
                     <label for="pelayanan" class="form-label">Pelayanan</label>
-                    <select class="form-select" id="pelayanan" name="pelayanan">
+                    <select class="form-select" id="pelayanan" name="pelayanan" onchange="hitungTotalPembayaran()">
                         <option value="Standar">Standar</option>
                         <option value="VIP">VIP</option>
                     </select>
                 </div>
                 <div class="mb-3">
                     <label for="hari" class="form-label">Berapa Hari</label>
-                    <input type="number" class="form-control" id="hari" name="hari" required oninput="hitungTotalPembayaran()">
+                    <input type="number" class="form-control" id="hari" name="hari" min="1" required oninput="hitungTotalPembayaran()">
                 </div>
                 <div class="mb-3">
                     <label for="peserta" class="form-label">Jumlah Peserta</label>
-                    <input type="number" class="form-control" id="peserta" name="peserta" required oninput="hitungTotalPembayaran()">
+                    <input type="number" class="form-control" id="peserta" name="peserta" min="1" required oninput="hitungTotalPembayaran()">
                 </div>
                 <div class="mb-3">
                     <p id="totalPembayaran" class="total-pembayaran">Total Pembayaran: Rp. 0</p>
@@ -99,6 +99,11 @@ $row = $result->fetch_assoc();
         </div>
     </div>
 
+    <script>
+        window.onload = function() {
+            applyDiscount();
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
