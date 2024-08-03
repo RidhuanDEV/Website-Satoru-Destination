@@ -64,13 +64,13 @@ if ($_SESSION['user_id'] != 'admin') {
             </a>
           </li>
           <li>
-            <a href="tiket.php" class="nav-link px-3 active">
+            <a href="tiket.php" class="nav-link px-3 ">
               <span class="me-2"><i class="bi bi-database-fill-gear"></i></span>
               <span>Daftar Booking Tiket</span>
             </a>
           </li>
           <li>
-            <a href="pemesanan_tiket.php" class="nav-link px-3">
+            <a href="pemesanan_tiket.php" class="nav-link px-3 active">
               <span class="me-2"><i class="bi bi-gear"></i></span>
               <span>Pemesanan Tiket</span>
             </a>
@@ -90,51 +90,57 @@ if ($_SESSION['user_id'] != 'admin') {
   <div class="container d-flex">
     <div style="width: 250px;height: fit-content"></div>
     <div class="container mt-5 pt-3">
-      <h1 class="mb-4">Daftar Booking Tiket Wisata</h1>
+      <h1 class="mb-4">Daftar Pemesanan Tiket Wisata</h1>
       <a href="form/create_wisata.php" class="btn btn-primary mb-3">Create Data</a>
       <table id="wisataTable" class="display">
         <thead>
           <tr>
-            <th>ID Transaksi</th>
-            <th>Email User</th>
-            <th>Tanggal Pemesanan</th>
-            <th>Total Pembayaran</th>
-            <th>Time Out</th>
+          <th>ID Transaksi</th>
+          <th>Email User</th>
+          <th>Tanggal Pemesanan</th>
+          <th>Total Pembayaran</th>
+          <th>Terima</th>
+          <th>Tolak</th>
           </tr>
         </thead>
         <tbody>
-          <?php
-          include '../../controller/koneksi.php';
-          include '../../controller/fungsi_konversi.php';
-          // Mengambil data dari tabel tiket_wisata dan tabel tbl_user
-          $sql = "SELECT tiket_wisata.*, tbl_user.email 
-          FROM tiket_wisata 
-          JOIN tbl_user ON tiket_wisata.id_users = tbl_user.id";
+        <?php
+            include '../../controller/koneksi.php';
+            include '../../controller/fungsi_konversi.php';
 
-          $result = $conn->query($sql);
+            // Mengambil data dari tabel tiket_wisata dengan status 'On Progress'
+            $sql = "SELECT tiket_wisata.*, tbl_user.email 
+                    FROM tiket_wisata 
+                    JOIN tbl_user ON tiket_wisata.id_users = tbl_user.id
+                    WHERE tiket_wisata.status = 'On Progress'";
 
-          if ($result->num_rows > 0) {
-              while ($row = $result->fetch_assoc()) {
-                  echo "<tr>";
-                  echo "<td>" . $row["id_transaksi"] . "</td>";
-                  echo "<td>" . $row["email"] . "</td>";
-                  echo "<td>" . formatTanggal($row['tanggal_pemesanan']) . "</td>";
-                  echo "<td>" . formatRupiah($row['total_pembayaran']) . "</td>";
-                  echo "<td><a href='../../controller/timeout_pesanan.php?id=" . $row["id_transaksi"] . "' class='btn btn-danger' onclick='return confirm(\"Apakah Anda ingin Time Out pesanan ini?\")'>Time Out</a></td>";
-                  echo "</tr>";
-              }
-          } else {
-            echo "<tr>
-            <td colspan='1'>Tidak ada data.</td>
-            <td colspan='1'>Tidak ada data.</td>
-            <td colspan='1'>Tidak ada data.</td>
-            <td colspan='1'>Tidak ada data.</td>
-            <td colspan='1'>Tidak ada data.</td>
-            </tr>";
-          }
+            $result = $conn->query($sql);
 
-          $conn->close();
-          ?>
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . $row["id_transaksi"] . "</td>";
+                    echo "<td>" . $row["email"] . "</td>";
+                    echo "<td>" . formatTanggal($row['tanggal_pemesanan']) . "</td>";
+                    echo "<td>" . formatRupiah($row['total_pembayaran']) . "</td>";
+                    echo "<td><a href='../../controller/approve.php?id=" . $row["id_transaksi"] . "' class='btn btn-primary' onclick='return confirm(\"Apakah Anda menyetujui pesanan ini?\")'>Konfirmasi</a></td>";
+                    echo "<td><a href='../../controller/reject_pesanan.php?id=" . $row["id_transaksi"] . "' class='btn btn-danger' onclick='return confirm(\"Apakah Anda menolak pesanan ini?\")'>Tolak</a></td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr>
+                <td colspan='1'>Tidak ada data.</td>
+                <td colspan='1'>Tidak ada data.</td>
+                <td colspan='1'>Tidak ada data.</td>
+                <td colspan='1'>Tidak ada data.</td>
+                <td colspan='1'>Tidak ada data.</td>
+                <td colspan='1'>Tidak ada data.</td>
+                </tr>";
+            }
+
+            $conn->close();
+            ?>
+
         </tbody>
       </table>
       </div>

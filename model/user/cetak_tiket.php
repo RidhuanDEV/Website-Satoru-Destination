@@ -2,7 +2,18 @@
 require('../../controller/fpdf/fpdf.php');
 include '../../controller/koneksi.php';
 session_start();
+if (!isset($_SESSION['user_id'])) {
+    // Pengguna belum login, arahkan ke halaman login
+    header("Location: form/login.php");
+    exit();
+}
 
+// Jika pengguna sudah login, periksa perannya
+if ($_SESSION['user_id'] == 'admin') {
+    // Arahkan admin ke halaman admin
+    header("Location: ../admin/index.php");
+    exit();
+}
 class PDF extends FPDF {
     function Header() {
         // Title PDF
@@ -62,9 +73,11 @@ if (isset($_GET['id'])) {
     $id_transaksi = $_GET['id'];
 
     // Fetch data tiket wisata
-    $sql = "SELECT tbl_wisata.nama, tbl_wisata.deskripsi, tiket_wisata.total_pembayaran, tiket_wisata.peserta, tiket_wisata.hari
+    $sql = "SELECT tbl_wisata.nama, tbl_wisata.deskripsi, tiket_wisata.total_pembayaran, tiket_wisata.peserta, 
+            tiket_wisata.hari, tiket_wisata.status, tbl_user.email
             FROM tbl_wisata
             JOIN tiket_wisata ON tiket_wisata.id_wisata = tbl_wisata.id
+            JOIN tbl_user ON tiket_wisata.id_users = tbl_user.id
             WHERE tiket_wisata.id_transaksi = $id_transaksi and tiket_wisata.id_users = " . $_SESSION['user_id'];
     $result = $conn->query($sql);
     $data = $result->fetch_assoc();
@@ -73,11 +86,14 @@ if (isset($_GET['id'])) {
     $pdf->AliasNbPages();
     $pdf->AddPage();
     $pdf->TicketDetails([
+        'Email Pemesan' => $data['email'],
         'Nama Wisata' => $data['nama'],
         'Deskripsi Wisata' => $data['deskripsi'],
         'Total Peserta' => $data['peserta'].' Orang',
         'Waktu Berwisata' => $data['hari']. ' Hari',
-        'Total Biaya' => 'Rp.'.$data['total_pembayaran']
+        'Status' => $data['hari']. ' Hari',
+        'Total Biaya' => 'Rp.'.$data['total_pembayaran'],
+        'Status' => $data['status']
     ]);
     $pdf->TicketExplanation();
     $pdf->Output();

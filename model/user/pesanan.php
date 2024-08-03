@@ -1,3 +1,20 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    // Pengguna belum login, arahkan ke halaman login
+    header("Location: form/login.php");
+    exit();
+}
+
+// Jika pengguna sudah login, periksa perannya
+if ($_SESSION['user_id'] == 'admin') {
+    // Arahkan admin ke halaman admin
+    header("Location: ../admin/index.php");
+    exit();
+}
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -33,11 +50,7 @@
                 </ul>
                 <div class="justify-content-end col-4 p-2"> 
                     <?php
-                        session_start();
-                        if (!isset($_SESSION['user_id'])) {
-                            header("Location: form/login.php");
-                            exit();
-                        }
+                        
                         
                         include '../../controller/koneksi.php';
                         if (isset($_SESSION['user_id'])) {
@@ -102,7 +115,7 @@
                         <th scope='col'>ID Transaksi</th>
                         <th scope='col'>Tanggal Pemesanan</th>
                         <th scope='col'>Pelayanan</th>
-                        <th scope='col'>Waktu Berwisata</th>
+                        <th scope='col'>Waktu</th>
                         <th scope='col'>Peserta</th>
                         <th scope='col'>Total Pembayaran</th>
                         <th scope='col'>Review Pesanan</th>
@@ -160,22 +173,30 @@
                         <th scope='col'>Tiket Wisata</th>
                         
                     </tr>
-                </thead>
-                <tbody>";
+                    </thead>
+                    <tbody>";
             // Output data of each row
-            while($row = $result->fetch_assoc()) {
+            while ($row = $result->fetch_assoc()) {
                 echo "<tr>
-                        <th scope='row'>".$row['id_transaksi']."</th>
-                        <td>".formatTanggal($row['tanggal_pemesanan'])."</td>
-                        <td>".$row['pelayanan']."</td>
-                        <td>".$row['hari']." Hari</td>
-                        <td>".$row['peserta']." Orang</td>
-                        <td>".formatRupiah($row['total_pembayaran'])."</td>
-                        <td><a href='cetak_tiket.php?id=".$row['id_transaksi']."' class='btn btn-primary btn-sm'>Cetak Tiket</a></td>
-                        
-                    </tr>";
+                        <th scope='row'>" . $row['id_transaksi'] . "</th>
+                        <td>" . formatTanggal($row['tanggal_pemesanan']) . "</td>
+                        <td>" . $row['pelayanan'] . "</td>
+                        <td>" . $row['hari'] . " Hari</td>
+                        <td>" . $row['peserta'] . " Orang</td>
+                        <td>" . formatRupiah($row['total_pembayaran']) . "</td>";
+                
+                if ($row['status'] == 'done') {
+                    echo "<td><a href='cetak_tiket.php?id=" . $row['id_transaksi'] . "' class='btn btn-primary btn-sm'>Cetak Tiket</a></td>";
+                } else {
+                    echo "<td style='color: blue;'>".$row['status']."</td>";
+                }
+                
+                echo "</tr>";
             }
-            echo "</tbody></table></div>";
+            echo "
+                    </tbody>
+                  </table>
+                </div>";
         } else {
             echo "<h2 class='text-center mt-5'>Tidak ada Pesanan</h2>";
         }

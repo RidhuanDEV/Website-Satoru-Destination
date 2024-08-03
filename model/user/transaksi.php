@@ -1,9 +1,20 @@
 <?php
+
 session_start();
+
 if (!isset($_SESSION['user_id'])) {
-    header("Location: /form/login.php");
+    // Pengguna belum login, arahkan ke halaman login
+    header("Location: form/login.php");
     exit();
 }
+
+// Jika pengguna sudah login, periksa perannya
+if ($_SESSION['user_id'] == 'admin') {
+    // Arahkan admin ke halaman admin
+    header("Location: ../admin/index.php");
+    exit();
+}
+
 
 include '../../controller/koneksi.php';
 // Mengambil ID wisata dari URL
@@ -32,37 +43,7 @@ if ($row["diskon"] == 'true') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transaksi - Pesan Tiket</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-        .form-container {
-            width: 600px;
-            height: 600px;
-            border: 1px solid #ddd;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            background-color: #f8f9fa;
-            margin: auto;
-            margin-top: 50px;
-            border-radius: 10px;
-        }
-        .form-container h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .form-container .form-label {
-            margin-bottom: 5px;
-        }
-        .form-container .btn-primary {
-            width: 100%;
-        }
-        .form-container .btn-danger {
-            width: 100%;
-            margin-top: 10px;
-        }
-        .total-pembayaran {
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
     <script src="../../controller/hitungTotal.js"></script>
 </head>
 <body>

@@ -18,12 +18,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $password = md5($_POST['password']);
 
-    $sql = "INSERT INTO tbl_user (nama, email, password) VALUES ('$name', '$email', '$password')";
+    // Check if email already exists
+    $checkEmailSql = "SELECT * FROM tbl_user WHERE email='$email'";
+    $result = $conn->query($checkEmailSql);
 
-    if ($conn->query($sql) === TRUE) {
-        echo "Registration successful";
+    if ($result->num_rows > 0) {
+        // Email already exists
+        echo "<script>
+        alert('Email sudah terpakai, gunakan email lain.');
+        window.location.href = '../model/user/form/register.php';
+        </script>";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        // Email does not exist, proceed with registration
+        $sql = "INSERT INTO tbl_user (nama, email, password) VALUES ('$name', '$email', '$password')";
+
+        if ($conn->query($sql) === TRUE) {
+            echo "Registration successful";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
     }
 }
 
