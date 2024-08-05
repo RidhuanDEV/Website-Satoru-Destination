@@ -38,7 +38,7 @@ try {
 
     // Menyimpan data ke tabel tiket_wisata
     $sql_insert = "INSERT INTO tiket_wisata (id_transaksi,id_wisata, id_users, pelayanan, hari, peserta, total_pembayaran, tanggal_pemesanan,status) 
-                   VALUES ('{$data['id_transaksi']}','{$data['id_wisata']}', '$id_user', '{$data['pelayanan']}', '{$data['hari']}', '{$data['peserta']}', '{$data['total_pembayaran']}', '{$data['tanggal_pemesanan']}'). 'On Progress'";
+                   VALUES ('{$data['id_transaksi']}','{$data['id_wisata']}', '$id_user', '{$data['pelayanan']}', '{$data['hari']}', '{$data['peserta']}', '{$data['total_pembayaran']}', '{$data['tanggal_pemesanan']}', 'On Progress')";
     if (!$conn->query($sql_insert)) {
         throw new Exception('Gagal menyimpan data ke tiket_wisata: ' . $conn->error);
     }

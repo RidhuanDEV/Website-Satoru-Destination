@@ -59,7 +59,7 @@ if ($result->num_rows > 0) {
 
     // Menyimpan data ke tabel test_wisata
     $sql = "UPDATE test_wisata 
-            SET pelayanan='$pelayanan', hari='$hari', peserta='$peserta', total_pembayaran='$total_pembayaran'
+            SET pelayanan='$pelayanan', hari='$hari', peserta='$peserta', total_pembayaran='$total_pembayaran', tanggal_pemesanan = NOW()
             WHERE id_transaksi='$id_transaksi' AND id_users='$id_user'";
     if ($conn->query($sql) === TRUE) {
         echo "<script>

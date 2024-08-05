@@ -85,14 +85,14 @@
       </div>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img class="img-thumbnail w-100 object-fit-cover" style="height: 450px;" src="view/assets/wisata3.webp" alt="..." />
+          <img class="img-thumbnail w-100 object-fit-cover" style="height: 450px;" src="view/assets/wisata3.jpg" alt="..." />
           <div class="carousel-caption d-none d-md-block">
             <h3>Cari Tempat Destination Wisata !</h3>
             <h5>Mulai Dari Rp.100.000</h5>
           </div>
         </div>
         <div class="carousel-item">
-          <img class="img-thumbnail w-100 object-fit-cover" style="height: 450px;" src="view/assets/wisata1.jpg" alt="..." />
+          <img class="img-thumbnail w-100 object-fit-cover" style="height: 450px;" src="view/assets/wisata.jpg" alt="..." />
           <div class="carousel-caption d-none d-md-block">
           <h3>Cari Tempat Destination Wisata !</h3>
           <h5>Mulai Dari Rp.100.000</h5>
@@ -333,18 +333,18 @@
             <h6 class="text-uppercase fw-bold">Products</h6>
             <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px;" />
             <p>
-              <a href="#!" class="text-white">Wisata</a>
+              <a href="model/user/product.php" class="text-white">Wisata</a>
             </p>
             <p>
-              <a href="#!" class="text-white
+              <a href="model/user/about.php" class="text-white
               ">About</a>
             </p>
             <p>
-              <a href="#!" class="text-white
+              <a href="model/user/galery.php" class="text-white
               ">Galery</a>
             </p>
             <p>
-              <a href="#!" class="text-white
+              <a href="model/user/pesanan.php" class="text-white
               ">Pesanan</a>
             </p>
           </div>
@@ -355,11 +355,11 @@
             <h6 class="text-uppercase fw-bold">Social Media</h6>
             <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px;" />
             <p>
-              <a href="#!" class="text-white"
+              <a href="https://www.youtube.com/@SatoruFoundation"0class="text-white"
               >Youtube</a>
             </p>
             <p>
-              <a href="#!" class="text-white
+              <a href="https://wa.me/+6282113472156" class="text-white
               ">WhatsApp</a>
             </p>
            

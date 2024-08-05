@@ -232,38 +232,38 @@ if ($_SESSION['user_id'] == 'admin') {
                 <h6 class="text-uppercase fw-bold">Products</h6>
                 <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px;" />
                 <p>
-                <a href="#!" class="text-white">Wisata</a>
+                <a href="product.php" class="text-white">Wisata</a>
                 </p>
                 <p>
-                <a href="#!" class="text-white
+                <a href="about.php" class="text-white
                 ">About</a>
                 </p>
                 <p>
-                <a href="#!" class="text-white
+                <a href="galery.php" class="text-white
                 ">Galery</a>
                 </p>
                 <p>
-                <a href="#!" class="text-white
+                <a href="pesanan.php" class="text-white
                 ">Pesanan</a>
                 </p>
             </div>
             <!-- Grid column -->
             <!-- Grid column -->
-            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                <!-- Links -->
-                <h6 class="text-uppercase fw-bold">Social Media</h6>
-                <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px;" />
-                <p>
-                <a href="#!" class="text-white"
-                >Youtube</a>
-                </p>
-                <p>
-                <a href="#!" class="text-white
-                ">WhatsApp</a>
-                </p>
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold">Social Media</h6>
+                    <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px;" />
+                    <p>
+                    <a href="https://www.youtube.com/@SatoruFoundation"0class="text-white"
+                    >Youtube</a>
+                    </p>
+                    <p>
+                    <a href="https://wa.me/+6282113472156" class="text-white
+                    ">WhatsApp</a>
+                    </p>
+                
+                </div>
             
-            </div>
-            <!-- Grid column -->
             <!-- Grid column -->
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                 <!-- Links -->

@@ -179,85 +179,85 @@
       ?>
 </div>
 
-      <!-- Footer -->
+  <!-- Footer -->
   <footer class="bg-dark text-center text-white mt-5">
-    <!-- Grid container -->
-    <div class="container p-4">
-      <!-- Section: Social media -->
-      
-    </div>
-    <!-- Grid container -->
-    <!-- Section: Links -->
-    <section>
-      <div class="container text-center text-md-start mt-5">
-        <!-- Grid row -->
-        <div class="row mt-3">
-          <!-- Grid column -->
-          <div class="col-sm-3 col-lg-4 col-xl-3 mx-auto mb-4">
-            <!-- Content -->
-            <h6 class="text-uppercase fw-bold">SATORU Destination</h6>
-            <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px;" />
-            <p>
-              SATORU Destination adalah website yang menyediakan Tiket tempat wisata yang ada di Indonesia.
-            </p>
-          </div>
-          <!-- Grid column -->
-          <!-- Grid column -->
-          <div class="col-sm-2 col-lg-2 col-xl-2 mx-auto mb-4">
-            <!-- Links -->
-            <h6 class="text-uppercase fw-bold">Products</h6>
-            <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px;" />
-            <p>
-              <a href="#!" class="text-white">Wisata</a>
-            </p>
-            <p>
-              <a href="#!" class="text-white
-              ">About</a>
-            </p>
-            <p>
-              <a href="#!" class="text-white
-              ">Galery</a>
-            </p>
-            <p>
-              <a href="#!" class="text-white
-              ">Pesanan</a>
-            </p>
-          </div>
-          <!-- Grid column -->
-          <!-- Grid column -->
-          <div class="col-sm-3 col-lg-2 col-xl-2 mx-auto mb-4">
-            <!-- Links -->
-            <h6 class="text-uppercase fw-bold">Social Media</h6>
-            <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px;" />
-            <p>
-              <a href="#!" class="text-white"
-              >Youtube</a>
-            </p>
-            <p>
-              <a href="#!" class="text-white
-              ">WhatsApp</a>
-            </p>
-           
-          </div>
-          <!-- Grid column -->
-          <!-- Grid column -->
-          <div class="col-sm-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-            <!-- Links -->
-            <h6 class="text-uppercase fw-bold">Location</h6>
-            <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px;" />
-            <p>Institut Teknologi Indonesia</p>
-            <p>
-              Banten, Indonesia
-            </p>
-          </div>
-          <!-- Grid column -->
+        <!-- Grid container -->
+        <div class="container p-4">
+        <!-- Section: Social media -->
+        
         </div>
-        <!-- Grid row -->
-      </div>
-    </section>
-    <!-- Section: Links -->
-  </footer>
-  <!-- akhir footer -->
+        <!-- Grid container -->
+        <!-- Section: Links -->
+        <section>
+        <div class="container text-center text-md-start mt-5">
+            <!-- Grid row -->
+            <div class="row mt-3">
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                <!-- Content -->
+                <h6 class="text-uppercase fw-bold">SATORU Destination</h6>
+                <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px;" />
+                <p>
+                SATORU Destination adalah website yang menyediakan Tiket tempat wisata yang ada di Indonesia.
+                </p>
+            </div>
+            <!-- Grid column -->
+            <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                <!-- Links -->
+                <h6 class="text-uppercase fw-bold">Products</h6>
+                <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px;" />
+                <p>
+                <a href="product.php" class="text-white">Wisata</a>
+                </p>
+                <p>
+                <a href="about.php" class="text-white
+                ">About</a>
+                </p>
+                <p>
+                <a href="galery.php" class="text-white
+                ">Galery</a>
+                </p>
+                <p>
+                <a href="pesanan.php" class="text-white
+                ">Pesanan</a>
+                </p>
+            </div>
+            <!-- Grid column -->
+            <!-- Grid column -->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold">Social Media</h6>
+                    <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px;" />
+                    <p>
+                    <a href="https://www.youtube.com/@SatoruFoundation"0class="text-white"
+                    >Youtube</a>
+                    </p>
+                    <p>
+                    <a href="https://wa.me/+6282113472156" class="text-white
+                    ">WhatsApp</a>
+                    </p>
+                
+                </div>
+            
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                <!-- Links -->
+                <h6 class="text-uppercase fw-bold">Location</h6>
+                <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px;" />
+                <p>Institut Teknologi Indonesia</p>
+                <p>
+                Banten, Indonesia
+                </p>
+            </div>
+            <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
+        </div>
+        </section>
+        <!-- Section: Links -->
+    </footer>
+    <!-- akhir footer -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
