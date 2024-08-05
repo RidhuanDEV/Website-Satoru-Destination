@@ -29,7 +29,7 @@ $sql = "SELECT tbl_wisata.nama, tbl_wisata.deskripsi,tbl_wisata.diskon, product.
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
-} else{
+} else {
     echo "Data tidak ditemukan";
     exit();
 }
@@ -52,6 +52,7 @@ if ($results->num_rows > 0) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -60,6 +61,7 @@ if ($results->num_rows > 0) {
     <link rel="stylesheet" href="css/style.css">
     <script src="../../controller/hitungTotal.js"></script>
 </head>
+
 <body>
     <div class="container">
         <div class="form-container">
@@ -102,6 +104,7 @@ if ($results->num_rows > 0) {
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
+
 </html>
 
 <?php

@@ -2,20 +2,21 @@
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    // Pengguna belum login, arahkan ke halaman login
-    header("Location: ../user/form/login.php");
-    exit();
+  // Pengguna belum login, arahkan ke halaman login
+  header("Location: ../user/form/login.php");
+  exit();
 }
 
 // Jika pengguna sudah login, periksa perannya
 if ($_SESSION['user_id'] != 'admin') {
-    // Arahkan pengguna biasa ke halaman user
-    header("Location: ../../index.php");
-    exit();
+  // Arahkan pengguna biasa ke halaman user
+  header("Location: ../../index.php");
+  exit();
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -64,6 +65,7 @@ if ($_SESSION['user_id'] != 'admin') {
     }
   </style>
 </head>
+
 <body>
   <!-- top navigation bar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -125,9 +127,9 @@ if ($_SESSION['user_id'] != 'admin') {
   </div>
   <!-- offcanvas -->
   <div class="container d-flex mt-4">
-  <div style="width:   250px;height:fit-content"></div>
-  <!-- Dashboard content -->
-  <?php
+    <div style="width:   250px;height:fit-content"></div>
+    <!-- Dashboard content -->
+    <?php
     include '../../controller/koneksi.php';
 
     // Ambil total dari setiap tabel
@@ -148,53 +150,54 @@ if ($_SESSION['user_id'] != 'admin') {
 
     $conn->close();
     ?>
-      <div class="container mt-5 pt-3">
-        <div class="row">
-            <!-- Card for Users -->
-            <div class="col-md-4 mb-4">
-                <div class="card text-white bg-primary">
-                    <div class="card-body">
-                        <h5 class="card-title">Total Users</h5>
-                        <p class="card-text"><?php echo $total_users; ?> User</p>
-                        <a href="user.php" class="btn btn-light">Lihat Detail</a>
-                    </div>
-                </div>
+    <div class="container mt-5 pt-3">
+      <div class="row">
+        <!-- Card for Users -->
+        <div class="col-md-4 mb-4">
+          <div class="card text-white bg-primary">
+            <div class="card-body">
+              <h5 class="card-title">Total Users</h5>
+              <p class="card-text"><?php echo $total_users; ?> User</p>
+              <a href="user.php" class="btn btn-light">Lihat Detail</a>
             </div>
-            <!-- Card for Products -->
-            <div class="col-md-4 mb-4">
-                <div class="card text-white bg-success">
-                    <div class="card-body">
-                        <h5 class="card-title">Total Wisata</h5>
-                        <p class="card-text"><?php echo $total_products; ?> Wisata</p>
-                        <a href="product.php" class="btn btn-light">Lihat Detail</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card for Tickets -->
-            <div class="col-md-4 mb-4">
-                <div class="card text-white bg-danger">
-                    <div class="card-body">
-                        <h5 class="card-title">Total Booking Tiket Wisata</h5>
-                        <p class="card-text"><?php echo $total_tickets; ?> Tiket Di Booking</p>
-                        <a href="ticket.php" class="btn btn-light">Lihat Detail</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Card for Bookings -->
-            <div class="col-md-4 mb-4">
-                <div class="card text-white bg-info">
-                    <div class="card-body">
-                        <h5 class="card-title">Total Pemesanan Tiket</h5>
-                        <p class="card-text"><?php echo $total_bookings; ?> Pemesanan</p>
-                        <a href="pemesanan_tiket.php" class="btn btn-light">Lihat Detail</a>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+        <!-- Card for Products -->
+        <div class="col-md-4 mb-4">
+          <div class="card text-white bg-success">
+            <div class="card-body">
+              <h5 class="card-title">Total Wisata</h5>
+              <p class="card-text"><?php echo $total_products; ?> Wisata</p>
+              <a href="product.php" class="btn btn-light">Lihat Detail</a>
+            </div>
+          </div>
+        </div>
+        <!-- Card for Tickets -->
+        <div class="col-md-4 mb-4">
+          <div class="card text-white bg-danger">
+            <div class="card-body">
+              <h5 class="card-title">Total Booking Tiket Wisata</h5>
+              <p class="card-text"><?php echo $total_tickets; ?> Tiket Di Booking</p>
+              <a href="ticket.php" class="btn btn-light">Lihat Detail</a>
+            </div>
+          </div>
+        </div>
+        <!-- Card for Bookings -->
+        <div class="col-md-4 mb-4">
+          <div class="card text-white bg-info">
+            <div class="card-body">
+              <h5 class="card-title">Total Pemesanan Tiket</h5>
+              <p class="card-text"><?php echo $total_bookings; ?> Pemesanan</p>
+              <a href="pemesanan_tiket.php" class="btn btn-light">Lihat Detail</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <!-- End of Dashboard content -->
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
+
 </html>

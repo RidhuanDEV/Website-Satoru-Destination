@@ -1,15 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "wisata";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
-}
-
+include 'koneksi.php';
 $id = $_GET['id'];
 // Periksa apakah ada data terkait di tabel test_wisata
 $sql_check = "SELECT COUNT(*) AS count FROM test_wisata WHERE id_wisata=$id";
@@ -28,17 +18,17 @@ if ($row_check['count'] > 0) {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $foto_path = '../view/produk/'.$row['foto'];
-        
-    // Hapus entri dari tabel product terlebih dahulu
-    $sql_product = "DELETE FROM product WHERE id_wisata=$id";
-    if ($conn->query($sql_product) === TRUE) {
-        // Hapus entri dari tabel tbl_wisata
-        $sql_wisata = "DELETE FROM tbl_wisata WHERE id=$id";
-        if ($conn->query($sql_wisata) === TRUE) {
-            // Hapus file foto dari direktori
-            if (file_exists($foto_path)) {
-                unlink($foto_path);
+        $foto_path = '../view/produk/' . $row['foto'];
+
+        // Hapus entri dari tabel product terlebih dahulu
+        $sql_product = "DELETE FROM product WHERE id_wisata=$id";
+        if ($conn->query($sql_product) === TRUE) {
+            // Hapus entri dari tabel tbl_wisata
+            $sql_wisata = "DELETE FROM tbl_wisata WHERE id=$id";
+            if ($conn->query($sql_wisata) === TRUE) {
+                // Hapus file foto dari direktori
+                if (file_exists($foto_path)) {
+                    unlink($foto_path);
                 }
                 echo "<script>
                     alert('Data Berhasil dihapus !.');
@@ -56,4 +46,3 @@ if ($row_check['count'] > 0) {
 }
 
 $conn->close();
-?>

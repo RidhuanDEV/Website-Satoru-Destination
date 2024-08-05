@@ -1,18 +1,6 @@
 <?php
 session_start();
-// Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "wisata";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include 'koneksi.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
@@ -32,4 +20,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 $conn->close();
-?>

@@ -1,7 +1,8 @@
 <?php
 
 // Fungsi untuk memformat tanggal menjadi format yang diinginkan
-function formatTanggal($datetime) {
+function formatTanggal($datetime)
+{
     $date = explode(' ', $datetime)[0]; // Mengambil bagian tanggal saja dari datetime
     $bulan = array(
         1 => 'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'
@@ -11,8 +12,7 @@ function formatTanggal($datetime) {
 }
 
 // Fungsi untuk memformat total pembayaran menjadi format yang diinginkan
-function formatRupiah($angka) {
+function formatRupiah($angka)
+{
     return 'Rp. ' . number_format($angka, 0, ',', '.');
 }
-
-?>

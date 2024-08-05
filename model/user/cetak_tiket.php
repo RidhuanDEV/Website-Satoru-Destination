@@ -14,33 +14,37 @@ if ($_SESSION['user_id'] == 'admin') {
     header("Location: ../admin/index.php");
     exit();
 }
-class PDF extends FPDF {
-    function Header() {
+class PDF extends FPDF
+{
+    function Header()
+    {
         // Title PDF
         $this->SetFont('Arial', 'B', 16);
         $this->Cell(0, 10, 'SATORU DESTINATION', 0, 1, 'C');
         $this->Ln(10);
     }
 
-    function Footer() {
+    function Footer()
+    {
         // Page footer
         $this->SetY(-15);
         $this->SetFont('Arial', 'I', 8);
         $this->Cell(0, 10, 'Page ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
     }
 
-    function TicketDetails($data) {
+    function TicketDetails($data)
+    {
         $this->SetFont('Arial', '', 12);
-        
+
         // Lebar kolom kunci dan nilai
         $keyWidth = 50;
         $valueWidth = 140;
-    
+
         foreach ($data as $key => $value) {
             // Mencetak nama atribut dan titik dua di kolom yang lebih kecil
             $this->Cell($keyWidth, 10, $key, 0, 0, 'L'); // Rata kiri untuk nama atribut
             $this->Cell(10, 10, ':', 0, 0, 'C'); // Rata tengah untuk titik dua
-            
+
             // Menangani deskripsi wisata yang mungkin panjang menggunakan MultiCell
             if ($key === 'Deskripsi Wisata') {
                 $this->MultiCell($valueWidth, 10, $value, 0, 'L'); // Rata kiri untuk nilai
@@ -50,11 +54,12 @@ class PDF extends FPDF {
             }
         }
     }
-    
-    
-    
+
+
+
     // mencetak penjelasan tiket, termasuk informasi resmi dan tanda tangan, pada dokumen PDF dengan format yang telah ditentukan.
-    function TicketExplanation() {
+    function TicketExplanation()
+    {
         $this->Ln(10);
         $this->SetFont('Arial', 'B', 12);
         $this->Cell(0, 10, 'Penjelasan Tiket:', 0, 1);
@@ -89,10 +94,10 @@ if (isset($_GET['id'])) {
         'Email Pemesan' => $data['email'],
         'Nama Wisata' => $data['nama'],
         'Deskripsi Wisata' => $data['deskripsi'],
-        'Total Peserta' => $data['peserta'].' Orang',
-        'Waktu Berwisata' => $data['hari']. ' Hari',
-        'Status' => $data['hari']. ' Hari',
-        'Total Biaya' => 'Rp.'.$data['total_pembayaran'],
+        'Total Peserta' => $data['peserta'] . ' Orang',
+        'Waktu Berwisata' => $data['hari'] . ' Hari',
+        'Status' => $data['hari'] . ' Hari',
+        'Total Biaya' => 'Rp.' . $data['total_pembayaran'],
         'Status' => $data['status']
     ]);
     $pdf->TicketExplanation();
@@ -100,4 +105,3 @@ if (isset($_GET['id'])) {
 } else {
     echo "ID Transaksi tidak ditemukan.";
 }
-?>

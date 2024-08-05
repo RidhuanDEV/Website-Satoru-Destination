@@ -2,20 +2,21 @@
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    // Pengguna belum login, arahkan ke halaman login
-    header("Location: ../user/form/login.php");
-    exit();
+  // Pengguna belum login, arahkan ke halaman login
+  header("Location: ../user/form/login.php");
+  exit();
 }
 
 // Jika pengguna sudah login, periksa perannya
 if ($_SESSION['user_id'] != 'admin') {
-    // Arahkan pengguna biasa ke halaman user
-    header("Location: ../../index.php");
-    exit();
+  // Arahkan pengguna biasa ke halaman user
+  header("Location: ../../index.php");
+  exit();
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,6 +27,7 @@ if ($_SESSION['user_id'] != 'admin') {
   <link rel="stylesheet" href="css/style.css">
   <title>Admin Dashboard</title>
 </head>
+
 <body>
   <!-- top navigation bar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -95,40 +97,40 @@ if ($_SESSION['user_id'] != 'admin') {
       <table id="wisataTable" class="display">
         <thead>
           <tr>
-          <th>ID Transaksi</th>
-          <th>Email User</th>
-          <th>Tanggal Pemesanan</th>
-          <th>Total Pembayaran</th>
-          <th>Terima</th>
-          <th>Tolak</th>
+            <th>ID Transaksi</th>
+            <th>Email User</th>
+            <th>Tanggal Pemesanan</th>
+            <th>Total Pembayaran</th>
+            <th>Terima</th>
+            <th>Tolak</th>
           </tr>
         </thead>
         <tbody>
-        <?php
-            include '../../controller/koneksi.php';
-            include '../../controller/fungsi_konversi.php';
+          <?php
+          include '../../controller/koneksi.php';
+          include '../../controller/fungsi_konversi.php';
 
-            // Mengambil data dari tabel tiket_wisata dengan status 'On Progress'
-            $sql = "SELECT tiket_wisata.*, tbl_user.email 
+          // Mengambil data dari tabel tiket_wisata dengan status 'On Progress'
+          $sql = "SELECT tiket_wisata.*, tbl_user.email 
                     FROM tiket_wisata 
                     JOIN tbl_user ON tiket_wisata.id_users = tbl_user.id
                     WHERE tiket_wisata.status = 'On Progress'";
 
-            $result = $conn->query($sql);
+          $result = $conn->query($sql);
 
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>";
-                    echo "<td>" . $row["id_transaksi"] . "</td>";
-                    echo "<td>" . $row["email"] . "</td>";
-                    echo "<td>" . formatTanggal($row['tanggal_pemesanan']) . "</td>";
-                    echo "<td>" . formatRupiah($row['total_pembayaran']) . "</td>";
-                    echo "<td><a href='../../controller/approve.php?id=" . $row["id_transaksi"] . "' class='btn btn-primary' onclick='return confirm(\"Apakah Anda menyetujui pesanan ini?\")'>Konfirmasi</a></td>";
-                    echo "<td><a href='../../controller/reject_pesanan.php?id=" . $row["id_transaksi"] . "' class='btn btn-danger' onclick='return confirm(\"Apakah Anda menolak pesanan ini?\")'>Tolak</a></td>";
-                    echo "</tr>";
-                }
-            } else {
-                echo "<tr>
+          if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+              echo "<tr>";
+              echo "<td>" . $row["id_transaksi"] . "</td>";
+              echo "<td>" . $row["email"] . "</td>";
+              echo "<td>" . formatTanggal($row['tanggal_pemesanan']) . "</td>";
+              echo "<td>" . formatRupiah($row['total_pembayaran']) . "</td>";
+              echo "<td><a href='../../controller/approve.php?id=" . $row["id_transaksi"] . "' class='btn btn-primary' onclick='return confirm(\"Apakah Anda menyetujui pesanan ini?\")'>Konfirmasi</a></td>";
+              echo "<td><a href='../../controller/reject_pesanan.php?id=" . $row["id_transaksi"] . "' class='btn btn-danger' onclick='return confirm(\"Apakah Anda menolak pesanan ini?\")'>Tolak</a></td>";
+              echo "</tr>";
+            }
+          } else {
+            echo "<tr>
                 <td colspan='1'>Tidak ada data.</td>
                 <td colspan='1'>Tidak ada data.</td>
                 <td colspan='1'>Tidak ada data.</td>
@@ -136,22 +138,23 @@ if ($_SESSION['user_id'] != 'admin') {
                 <td colspan='1'>Tidak ada data.</td>
                 <td colspan='1'>Tidak ada data.</td>
                 </tr>";
-            }
+          }
 
-            $conn->close();
-            ?>
+          $conn->close();
+          ?>
 
         </tbody>
       </table>
-      </div>
+    </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https:////cdn.datatables.net/2.1.3/js/dataTables.min.js"></script>
   <script>
     $(document).ready(function() {
-        $('#wisataTable').DataTable();
+      $('#wisataTable').DataTable();
     });
   </script>
 </body>
+
 </html>

@@ -135,15 +135,15 @@
 
                       echo '  <ul class="navbar-nav col-sm-12 g-6 text-center">
                                       <li class="nav-item g-4 col-sm-6 ">
-                                          <a class="nav-link overflow-hidden" href="model/user/account.php">' . htmlspecialchars($userName) . '</a>
+                                          <a class="nav-link overflow-hidden" href="account.php">' . htmlspecialchars($userName) . '</a>
                                       </li>
                                       <li class="nav-item g-4 col-sm-5 mx-4">
-                                          <a class="nav-link" href="model/user/logout.php">Log Out</a>
+                                          <a class="nav-link" href="../../controller/logout.php">Log Out</a>
                                       </li>
                                   </ul>
                               ';
                   } else {
-                      echo '<a href="model/user/form/login.php" class="text-decoration-none">SIGN IN / SIGN UP</a>';
+                      echo '<a href="form/login.php" class="text-decoration-none">SIGN IN / SIGN UP</a>';
                   }
                   ?>
               </div>
@@ -233,13 +233,14 @@
       <div class="card guide-card">
         <div class="row">
           <div class="col-md-4">
-            <img src="path/to/your/guide2-image.jpg" class="card-img" alt="Panduan 2">
+            <img src="../../view/assets/bunaken.jpeg" class="card-img" alt="Panduan 1">
           </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">Panduan Wisata 2</h5>
-              <p class="card-text">Panduan kedua ini berisi tips-tips menarik untuk perjalanan kamu.</p>
-              <a href="path/to/your/guide2.pdf" class="btn btn-primary" download>Download PDF</a>
+          <div class="col-md-8 d-flex">
+            <div class="card-body d-flex flex-column justify-content-between">
+              <h5 class="card-title">Panduan Wisata Ke Taman Bunaken</h5>
+              <p class="card-text">Ini adalah panduan untuk membantu kamu menikmati perjalanan wisata ke taman bunaken yang indah.</p>
+              <p class="card-text">Download PDF ini Jika anda ingin mengetahuinya !</p>
+              <a href="../../view/assets/Panduan Mengenai Cara ke Bunaken.pdf" class="btn btn-primary" download>Download PDF</a>
             </div>
           </div>
         </div>
@@ -249,19 +250,20 @@
       <div class="card guide-card">
         <div class="row">
           <div class="col-md-4">
-            <img src="path/to/your/guide3-image.jpg" class="card-img" alt="Panduan 3">
+            <img src="../../view/assets/bunaken.jpeg" class="card-img" alt="Panduan 1">
           </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">Panduan Wisata 3</h5>
-              <p class="card-text">Panduan ketiga dengan informasi penting yang perlu kamu ketahui.</p>
-              <a href="path/to/your/guide3.pdf" class="btn btn-primary" download>Download PDF</a>
+          <div class="col-md-8 d-flex">
+            <div class="card-body d-flex flex-column justify-content-between">
+              <h5 class="card-title">Panduan Wisata Ke Taman Bunaken</h5>
+              <p class="card-text">Ini adalah panduan untuk membantu kamu menikmati perjalanan wisata ke taman bunaken yang indah.</p>
+              <p class="card-text">Download PDF ini Jika anda ingin mengetahuinya !</p>
+              <a href="../../view/assets/Panduan Mengenai Cara ke Bunaken.pdf" class="btn btn-primary" download>Download PDF</a>
             </div>
           </div>
         </div>
       </div>
-
-  </div>
+    </div>
+    </div>
 </div>
 
   </div>

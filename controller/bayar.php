@@ -24,11 +24,11 @@ try {
             FROM test_wisata 
             WHERE id_transaksi = $id_transaksi AND id_users = $id_user";
     $result = $conn->query($sql);
-    
+
     if ($result->num_rows === 0) {
         throw new Exception('Data tidak ditemukan');
     }
-    
+
     $data = $result->fetch_assoc();
 
     // Debugging: tampilkan data yang diambil
@@ -64,4 +64,3 @@ try {
 
 // Menutup koneksi
 $conn->close();
-?>

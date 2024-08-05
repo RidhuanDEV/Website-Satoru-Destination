@@ -2,20 +2,21 @@
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    // Pengguna belum login, arahkan ke halaman login
-    header("Location: ../user/form/login.php");
-    exit();
+  // Pengguna belum login, arahkan ke halaman login
+  header("Location: ../user/form/login.php");
+  exit();
 }
 
 // Jika pengguna sudah login, periksa perannya
 if ($_SESSION['user_id'] != 'admin') {
-    // Arahkan pengguna biasa ke halaman user
-    header("Location: ../../index.php");
-    exit();
+  // Arahkan pengguna biasa ke halaman user
+  header("Location: ../../index.php");
+  exit();
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,6 +27,7 @@ if ($_SESSION['user_id'] != 'admin') {
   <link rel="stylesheet" href="css/style.css">
   <title>Admin Dashboard</title>
 </head>
+
 <body>
   <!-- top navigation bar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -113,7 +115,7 @@ if ($_SESSION['user_id'] != 'admin') {
           $result = $conn->query($sql);
 
           if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
+            while ($row = $result->fetch_assoc()) {
               echo "<tr>";
               echo "<td>" . $row["id"] . "</td>";
               echo "<td>" . $row["nama"] . "</td>";
@@ -143,16 +145,17 @@ if ($_SESSION['user_id'] != 'admin') {
           ?>
         </tbody>
       </table>
-      </div>
+    </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https:////cdn.datatables.net/2.1.3/js/dataTables.min.js"></script>
- 
+
   <script>
     $(document).ready(function() {
-        $('#wisataTable').DataTable();
+      $('#wisataTable').DataTable();
     });
   </script>
 </body>
+
 </html>

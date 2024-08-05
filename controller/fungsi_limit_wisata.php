@@ -1,5 +1,6 @@
 <?php
-function fetch_wisata($order) {
+function fetch_wisata($order)
+{
     include 'koneksi.php';
 
     $sql = "
@@ -11,7 +12,7 @@ function fetch_wisata($order) {
     ";
 
     $result = $conn->query($sql);
-    
+
     $wisata = [];
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
@@ -22,4 +23,3 @@ function fetch_wisata($order) {
     $conn->close();
     return $wisata;
 }
-?>

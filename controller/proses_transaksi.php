@@ -70,4 +70,3 @@ if ($conn->query($sql) === TRUE) {
 
 // Menutup koneksi
 $conn->close();
-?>

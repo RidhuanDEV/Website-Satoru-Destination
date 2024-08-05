@@ -5,8 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tentang Kami - Satoru Destination</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="css/about.css">
 </head>
 
@@ -15,8 +14,7 @@
     <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body sticky-top" data-bs-theme="dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="../../index.php">SATORU Destination</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -37,7 +35,7 @@
                 <div class="justify-content-end col-4 p-2">
                     <?php
                     session_start();
-                    
+
                     include '../../controller/koneksi.php';
                     if (isset($_SESSION['user_id'])) {
                         // Mengambil nama pengguna dari database atau sesi
@@ -45,7 +43,7 @@
                         $result = $conn->query($sql);
                         $row = $result->fetch_assoc();
                         $userName = $row['nama']; // Contoh nama, sesuaikan dengan pengambilan nama dari database/sesi
-                        
+
                         // Mengecek panjang nama dan apakah mengandung spasi
                         if (strlen($userName) > 10 || strpos($userName, ' ') !== false) {
                             // Mengambil bagian pertama dari nama jika mengandung spasi
@@ -60,15 +58,15 @@
 
                         echo '  <ul class="navbar-nav col-sm-12 g-6 text-center">
                                     <li class="nav-item g-4 col-sm-6 ">
-                                        <a class="nav-link overflow-hidden" href="model/user/account.php">' . htmlspecialchars($userName) . '</a>
+                                        <a class="nav-link overflow-hidden" href="account.php">' . htmlspecialchars($userName) . '</a>
                                     </li>
                                     <li class="nav-item g-4 col-sm-5 mx-4">
-                                        <a class="nav-link" href="model/user/logout.php">Log Out</a>
+                                        <a class="nav-link" href="../../controller/logout.php">Log Out</a>
                                     </li>
                                 </ul>
                             ';
                     } else {
-                        echo '<a href="model/user/form/login.php" class="text-decoration-none">SIGN IN / SIGN UP</a>';
+                        echo '<a href="form/login.php" class="text-decoration-none">SIGN IN / SIGN UP</a>';
                     }
                     ?>
                 </div>
@@ -99,7 +97,7 @@
     <!-- Tentang Developer Section -->
     <div class="container mt-5">
         <div class="row d-flex justify-content-between">
-        <div class="col-md-4">
+            <div class="col-md-4">
                 <div class="card">
                     <img src="../../view/assets/profilsaya.jpg" class="card-img-top" alt="Keunggulan 1" style="height: 350px;">
                 </div>
@@ -107,7 +105,7 @@
             <div class="col-md-6">
                 <h2 class="section-title">Tentang Developer</h2>
                 <p class="box-shadow">SATORU Destination adalah sebuah website e-commerce yang saya buat untuk menjadi sebuah business dalam bidang pariwisata,
-                     Nama Saya adalah Ridhuan Rangga Kusuma dan saya tinggal di Bogor, Seorang mahasiswa yang mengejar karir dalam dunia teknologi.</p>
+                    Nama Saya adalah Ridhuan Rangga Kusuma dan saya tinggal di Bogor, Seorang mahasiswa yang mengejar karir dalam dunia teknologi.</p>
             </div>
         </div>
     </div>
@@ -164,87 +162,85 @@
         </div>
     </div>
     <!-- akhir section -->
-     <!-- Footer -->
+    <!-- Footer -->
     <footer class="bg-dark text-center text-white mt-5">
         <!-- Grid container -->
         <div class="container p-4">
-        <!-- Section: Social media -->
-        
+            <!-- Section: Social media -->
+
         </div>
         <!-- Grid container -->
         <!-- Section: Links -->
         <section>
-        <div class="container text-center text-md-start mt-5">
-            <!-- Grid row -->
-            <div class="row mt-3">
-            <!-- Grid column -->
-            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                <!-- Content -->
-                <h6 class="text-uppercase fw-bold">SATORU Destination</h6>
-                <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px;" />
-                <p>
-                SATORU Destination adalah website yang menyediakan Tiket tempat wisata yang ada di Indonesia.
-                </p>
-            </div>
-            <!-- Grid column -->
-            <!-- Grid column -->
-            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                <!-- Links -->
-                <h6 class="text-uppercase fw-bold">Products</h6>
-                <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px;" />
-                <p>
-                <a href="product.php" class="text-white">Wisata</a>
-                </p>
-                <p>
-                <a href="about.php" class="text-white
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <h6 class="text-uppercase fw-bold">SATORU Destination</h6>
+                        <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px;" />
+                        <p>
+                            SATORU Destination adalah website yang menyediakan Tiket tempat wisata yang ada di Indonesia.
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold">Products</h6>
+                        <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px;" />
+                        <p>
+                            <a href="product.php" class="text-white">Wisata</a>
+                        </p>
+                        <p>
+                            <a href="about.php" class="text-white
                 ">About</a>
-                </p>
-                <p>
-                <a href="galery.php" class="text-white
+                        </p>
+                        <p>
+                            <a href="galery.php" class="text-white
                 ">Galery</a>
-                </p>
-                <p>
-                <a href="pesanan.php" class="text-white
+                        </p>
+                        <p>
+                            <a href="pesanan.php" class="text-white
                 ">Pesanan</a>
-                </p>
-            </div>
-            <!-- Grid column -->
-            <!-- Grid column -->
-                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                    <!-- Links -->
-                    <h6 class="text-uppercase fw-bold">Social Media</h6>
-                    <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px;" />
-                    <p>
-                    <a href="https://www.youtube.com/@SatoruFoundation"0class="text-white"
-                    >Youtube</a>
-                    </p>
-                    <p>
-                    <a href="https://wa.me/+6282113472156" class="text-white
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold">Social Media</h6>
+                        <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px;" />
+                        <p>
+                            <a href="https://www.youtube.com/@SatoruFoundation" 0class="text-white">Youtube</a>
+                        </p>
+                        <p>
+                            <a href="https://wa.me/+6282113472156" class="text-white
                     ">WhatsApp</a>
-                    </p>
-                
+                        </p>
+
+                    </div>
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold">Location</h6>
+                        <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px;" />
+                        <p>Institut Teknologi Indonesia</p>
+                        <p>
+                            Banten, Indonesia
+                        </p>
+                    </div>
+                    <!-- Grid column -->
                 </div>
-            
-            <!-- Grid column -->
-            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                <!-- Links -->
-                <h6 class="text-uppercase fw-bold">Location</h6>
-                <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px;" />
-                <p>Institut Teknologi Indonesia</p>
-                <p>
-                Banten, Indonesia
-                </p>
+                <!-- Grid row -->
             </div>
-            <!-- Grid column -->
-            </div>
-            <!-- Grid row -->
-        </div>
         </section>
         <!-- Section: Links -->
     </footer>
     <!-- akhir footer -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
 </body>
 

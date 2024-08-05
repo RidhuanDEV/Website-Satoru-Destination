@@ -31,4 +31,3 @@ if ($stmt->execute()) {
 // Menutup statement dan koneksi
 $stmt->close();
 $conn->close();
-?>

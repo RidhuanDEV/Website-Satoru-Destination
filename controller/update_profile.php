@@ -1,18 +1,6 @@
 <?php
 session_start();
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "wisata";
-
-// Membuat koneksi
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Memeriksa koneksi
-if ($conn->connect_error) {
-  die("Koneksi gagal: " . $conn->connect_error);
-}
+include 'koneksi.php';
 
 // Ambil data dari form
 $nama_baru = $_POST['nama'];
@@ -45,4 +33,3 @@ if ($result->num_rows > 0) {
 }
 
 $conn->close();
-?>

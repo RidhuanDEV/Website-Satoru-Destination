@@ -1,14 +1,6 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "wisata";
+include 'koneksi.php';
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
-}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nama = $_POST['nama_wisata'];
@@ -49,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         if (move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file)) {
             $sql = "INSERT INTO tbl_wisata (nama, deskripsi, foto, diskon)
-                    VALUES ('$nama', '$deskripsi', '".basename($_FILES["foto"]["name"])."', $diskon)";
+                    VALUES ('$nama', '$deskripsi', '" . basename($_FILES["foto"]["name"]) . "', $diskon)";
 
             if ($conn->query($sql) === TRUE) {
                 $id_wisata = $conn->insert_id;
@@ -70,4 +62,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 $conn->close();
-?>
