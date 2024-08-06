@@ -14,6 +14,7 @@ if ($_SESSION['user_id'] != 'admin') {
   exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -96,7 +97,7 @@ if ($_SESSION['user_id'] != 'admin') {
 
     <div class="container mt-5 pt-3">
       <h1 class="mb-4">Data User</h1>
-      <a href="create_user.php" class="btn btn-primary mb-3">Create Data</a>
+      <a href="../user/form/register.php" class="btn btn-primary mb-3">Create Data</a>
       <table id="userTable" class="display">
         <thead>
           <tr>
@@ -122,8 +123,8 @@ if ($_SESSION['user_id'] != 'admin') {
               echo "<td>" . $row["nama"] . "</td>";
               echo "<td>" . $row["email"] . "</td>";
               echo "<td>" . '*********' . "</td>";
-              echo "<td><a href='form/update_wisata.php?id=" . $row["id"] . "' class='btn btn-success'>Update</a></td>";
-              echo "<td><a href='../../controller/delete_wisata.php?id=" . $row["id"] . "' class='btn btn-danger'>Delete</a></td>";
+              echo "<td><a href='form/update_user.php?id=" . $row["id"] . "' class='btn btn-success'>Update</a></td>";
+              echo "<td><a href='../../controller/delete_user.php?id=" . $row["id"] . "' class='btn btn-danger'>Delete</a></td>";
 
               echo "</tr>";
             }

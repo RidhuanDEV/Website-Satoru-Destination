@@ -6,84 +6,7 @@
     <title>Galeri - Satoru Destination</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-        .card {
-        border: 1px solid #ddd;
-        border-radius: .25rem;
-        overflow: hidden;
-      }
-
-      .card-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover; /* Ensures image covers the area without stretching */
-        display: block; /* Ensures the image fills the container */
-      }
-
-      .card-body {
-        padding: 1.25rem;
-      }
-
-        .img-thumbnail{
-          width: 300px;
-          height: 300px;
-        }
-        .gallery-img {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .gallery-img img {
-            width: 100%;
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-img:hover img {
-            transform: scale(1.1);
-        }
-
-        .gallery-img .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .gallery-img:hover .overlay {
-            opacity: 1;
-        }
-
-        .overlay h5 {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            margin: 0;
-        }
-
-        .guide-card {
-            width: 100%;
-            height: 250px;
-            border: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.3s ease;
-        }
-
-        .guide-card:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        .guide-card img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-    </style>
+    <link rel="stylesheet" href="css/galery.css">
 </head>
 <body>
   <!-- nav bar -->
@@ -143,7 +66,12 @@
                                   </ul>
                               ';
                   } else {
-                      echo '<a href="form/login.php" class="text-decoration-none">SIGN IN / SIGN UP</a>';
+                    echo '
+                    <ul class="navbar-nav col-sm-12 g-6 text-center justify-content-end">
+                        <li class="nav-item g-4 col-sm-4 ">
+                            <a href="model/user/form/login.php" class="text-decoration-none">SIGN IN / SIGN UP</a>
+                        </li>
+                    </ul>';
                   }
                   ?>
               </div>

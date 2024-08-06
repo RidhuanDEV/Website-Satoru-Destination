@@ -22,7 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql = "INSERT INTO tbl_user (nama, email, password) VALUES ('$name', '$email', '$password')";
 
         if ($conn->query($sql) === TRUE) {
-            echo "Registration successful";
+            echo "<script>
+            alert('Daftar Akun Berhasil silahkan Login.');
+            window.location.href = '../model/user/form/login.php';
+            </script>";
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }

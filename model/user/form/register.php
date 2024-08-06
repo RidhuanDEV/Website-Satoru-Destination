@@ -5,33 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Register</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-      body {
-        background-color: #121212;
-        color: white;
-      }
-      .form-control {
-        background-color: #1f1f1f;
-        color: white;
-      }
-      .btn-primary {
-        background-color: #6200ea;
-        border-color: #6200ea;
-      }
-      .btn-primary:hover {
-        background-color: #3700b3;
-        border-color: #3700b3;
-      }
-      .login-container {
-        width: 500px;
-        height: 500px;
-        margin: 100px auto;
-        padding: 20px;
-        background-color: #333;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-      }
-    </style>
+    <link rel="stylesheet" href="../css/register.css">
   </head>
   <body>
     <div class="container login-container mt-5">

@@ -21,7 +21,10 @@ if ($result->num_rows > 0) {
     // Password lama cocok, update password baru dan nama
     $sql_update = "UPDATE tbl_user SET password = '$password_baru', nama = '$nama_baru' WHERE id = $id_pengguna";
     if ($conn->query($sql_update) === TRUE) {
-      echo "Profil berhasil diperbarui.";
+      echo "<script>
+            alert('Update Berhasil !');
+            window.location.href = '../model/user/account.php';
+          </script>";
     } else {
       echo "Error: " . $sql_update . "<br>" . $conn->error;
     }

@@ -21,7 +21,7 @@ if ($_SESSION['user_id'] == 'admin') {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Pesanan Wisata</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 </head>
@@ -83,7 +83,12 @@ if ($_SESSION['user_id'] == 'admin') {
                                     </ul>
                                 ';
                     } else {
-                        echo '<a href="form/login.php" class="text-decoration-none">SIGN IN / SIGN UP</a>';
+                        echo '
+                        <ul class="navbar-nav col-sm-12 g-6 text-center justify-content-end">
+                            <li class="nav-item g-4 col-sm-4 ">
+                                <a href="model/user/form/login.php" class="text-decoration-none">SIGN IN / SIGN UP</a>
+                            </li>
+                        </ul>';
                     }
 
                     ?>

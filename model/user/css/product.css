@@ -1,0 +1,19 @@
+@media (max-width: 600px) {
+    .card-text-short {
+        display: inline;
+    }
+
+    .card-text-long {
+        display: none;
+    }
+}
+
+@media (min-width: 601px) {
+    .card-text-short {
+        display: none;
+    }
+
+    .card-text-long {
+        display: inline;
+    }
+}
