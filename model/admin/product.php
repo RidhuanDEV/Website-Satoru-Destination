@@ -68,13 +68,19 @@ if ($_SESSION['user_id'] != 'admin') {
           <li>
             <a href="tiket.php" class="nav-link px-3 ">
               <span class="me-2"><i class="bi bi-database-fill-gear"></i></span>
-              <span>Daftar Booking Tiket</span>
+              <span>Daftar Pesanan Tiket</span>
             </a>
           </li>
           <li>
             <a href="pemesanan_tiket.php" class="nav-link px-3">
-              <span class="me-2"><i class="bi bi-gear"></i></span>
+              <span class="me-2"><i class="bi bi-database-fill"></i></span>
               <span>Pemesanan Tiket</span>
+            </a>
+          </li>
+          <li>
+            <a href="book_tiket.php" class="nav-link px-3">
+              <span class="me-2"><i class="bi bi-database-fill"></i></span>
+              <span>Daftar Booking Tiket</span>
             </a>
           </li>
           <li>

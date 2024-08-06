@@ -1,15 +1,6 @@
 // update_wisata.php
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "wisata";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
-}
+include 'koneksi.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id_wisata = $_POST['id_wisata'];
@@ -22,6 +13,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $target_file = $target_dir . basename($_FILES["foto"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    
+    $sql = "SELECT foto FROM tbl_wisata WHERE id=$id_wisata";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
 
     $check = getimagesize($_FILES["foto"]["tmp_name"]);
     if ($check !== false) {
@@ -31,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $uploadOk = 0;
     }
 
-    if (file_exists($target_file)) {
+    if (basename($_FILES["foto"]["name"]) != $row['foto'] && file_exists($target_file)) {
         echo "Maaf, file sudah ada.";
         $uploadOk = 0;
     }

@@ -92,7 +92,7 @@ $conn->close();
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password baru">
+          <input type="password" class="form-control" id="password" name="password" placeholder="Kosongkan Jika tidak ingin di Ubah">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
         <a href="user.php" class="btn btn-secondary">Cancel</a>

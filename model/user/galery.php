@@ -69,7 +69,7 @@
                     echo '
                     <ul class="navbar-nav col-sm-12 g-6 text-center justify-content-end">
                         <li class="nav-item g-4 col-sm-4 ">
-                            <a href="model/user/form/login.php" class="text-decoration-none">SIGN IN / SIGN UP</a>
+                            <a href="form/login.php" class="text-decoration-none">SIGN IN / SIGN UP</a>
                         </li>
                     </ul>';
                   }

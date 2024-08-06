@@ -98,7 +98,7 @@ if ($_SESSION['user_id'] != 'admin') {
   <div class="container d-flex">
     <div style="width: 250px;height: fit-content"></div>
     <div class="container mt-5 pt-3">
-      <h1 class="mb-4">Kelola Pemesanan Tiket Wisata</h1>
+      <h1 class="mb-4">Daftar Booking Tiket Wisata</h1>
       <div style="height: 20px;"> </div>
       <table id="wisataTable" class="display">
         <thead>
@@ -107,20 +107,17 @@ if ($_SESSION['user_id'] != 'admin') {
             <th>Email User</th>
             <th>Tanggal Pemesanan</th>
             <th>Total Pembayaran</th>
-            <th>Terima</th>
-            <th>Tolak</th>
+            <th>Time Out</th>
           </tr>
         </thead>
         <tbody>
           <?php
           include '../../controller/koneksi.php';
           include '../../controller/fungsi_konversi.php';
-
-          // Mengambil data dari tabel tiket_wisata dengan status 'On Progress'
-          $sql = "SELECT tiket_wisata.*, tbl_user.email 
-                    FROM tiket_wisata 
-                    JOIN tbl_user ON tiket_wisata.id_users = tbl_user.id
-                    WHERE tiket_wisata.status = 'On Progress'";
+          // Mengambil data dari tabel tiket_wisata dan tabel tbl_user
+          $sql = "SELECT test_wisata.*, tbl_user.email 
+          FROM test_wisata 
+          JOIN tbl_user ON test_wisata.id_users = tbl_user.id";
 
           $result = $conn->query($sql);
 
@@ -131,24 +128,22 @@ if ($_SESSION['user_id'] != 'admin') {
               echo "<td>" . $row["email"] . "</td>";
               echo "<td>" . formatTanggal($row['tanggal_pemesanan']) . "</td>";
               echo "<td>" . formatRupiah($row['total_pembayaran']) . "</td>";
-              echo "<td><a href='../../controller/approve.php?id=" . $row["id_transaksi"] . "' class='btn btn-primary' onclick='return confirm(\"Apakah Anda menyetujui pesanan ini?\")'>Konfirmasi</a></td>";
-              echo "<td><a href='../../controller/reject_pesanan.php?id=" . $row["id_transaksi"] . "' class='btn btn-danger' onclick='return confirm(\"Apakah Anda menolak pesanan ini?\")'>Tolak</a></td>";
+              echo "<td><a href='../../controller/timeout_pesanan.php?id=" . $row["id_transaksi"] . "' class='btn btn-danger' onclick='return confirm(\"Apakah Anda ingin Time Out pesanan ini?\")'>Time Out</a></td>";
               echo "</tr>";
             }
           } else {
             echo "<tr>
-                <td colspan='1'>Tidak ada data.</td>
-                <td colspan='1'>Tidak ada data.</td>
-                <td colspan='1'>Tidak ada data.</td>
-                <td colspan='1'>Tidak ada data.</td>
-                <td colspan='1'>Tidak ada data.</td>
-                <td colspan='1'>Tidak ada data.</td>
-                </tr>";
+            <td colspan='1'>Tidak ada data.</td>
+            <td colspan='1'>Tidak ada data.</td>
+            <td colspan='1'>Tidak ada data.</td>
+            <td colspan='1'>Tidak ada data.</td>
+            <td colspan='1'>Tidak ada data.</td>
+            <td colspan='1'>Tidak ada data.</td>
+            </tr>";
           }
 
           $conn->close();
           ?>
-
         </tbody>
       </table>
     </div>

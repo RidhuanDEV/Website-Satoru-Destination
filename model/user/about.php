@@ -69,7 +69,7 @@
                         echo '
                         <ul class="navbar-nav col-sm-12 g-6 text-center justify-content-end">
                             <li class="nav-item g-4 col-sm-4 ">
-                                <a href="model/user/form/login.php" class="text-decoration-none">SIGN IN / SIGN UP</a>
+                                <a href="form/login.php" class="text-decoration-none">SIGN IN / SIGN UP</a>
                             </li>
                         </ul>';
                     }
@@ -157,11 +157,12 @@
             <div class="col-12">
                 <h2 class="section-title">Syarat Pesan Tiket</h2>
                 <ol class="box-shadow">
-                    <li>Semua pemesanan harus dilakukan minimal 48 jam sebelum keberangkatan.</li>
+                    <li>Semua pemesanan harus dilakukan maksimal 48 jam untuk dibayar.</li>
                     <li>Diperlukan identifikasi yang valid saat pemesanan dan saat tiba di tujuan.</li>
                     <li>Pembayaran penuh diperlukan untuk mengonfirmasi pemesanan Anda.</li>
-                    <li>Kebijakan pembatalan berlaku. Silakan merujuk ke halaman kebijakan pembatalan kami untuk detail lebih lanjut.</li>
-                    <li>Kebutuhan atau permintaan khusus harus dikomunikasikan saat pemesanan.</li>
+                    <li>Kebijakan pembatalan berlaku. Silakan merujuk ke halaman pesanan untuk detail lebih lanjut.</li>
+                    <li>Kesopanan anda menjunjung tinggi rasa hormat kami kepada client.</li>
+                    <li>Jika Pesanan tidak dibayar dalam kurun waktu tersebut maka akan dibatalkan.</li>
                 </ol>
             </div>
         </div>

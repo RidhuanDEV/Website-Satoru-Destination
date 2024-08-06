@@ -1,6 +1,6 @@
 <?php
 // Database connection
-include '../koneksi.php';
+include 'koneksi.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
@@ -22,10 +22,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql = "INSERT INTO tbl_user (nama, email, password) VALUES ('$name', '$email', '$password')";
 
         if ($conn->query($sql) === TRUE) {
-            echo "<script>
-            alert('Daftar Akun Berhasil silahkan Login.');
-            window.location.href = '../model/user/form/login.php';
-            </script>";
+            session_start();
+            if (!isset($_SESSION['user_id'])) {
+                echo "<script>
+                    alert('Daftar Akun Berhasil silahkan Login.');
+                    window.location.href = '../model/user/form/login.php';
+                    </script>";
+            } else if (isset($_SESSION['user_id'])) {
+                echo "<script>
+                    alert('Daftar Akun Berhasil.');
+                    window.location.href = '../model/admin/user.php';
+                    </script>";
+            }
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }

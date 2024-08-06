@@ -25,45 +25,6 @@ if ($_SESSION['user_id'] != 'admin') {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <title>Admin Dashboard</title>
-  <style>
-    .card {
-      border-radius: 15px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    }
-
-    .card .card-body {
-      position: relative;
-    }
-
-    .card .card-body::before {
-      content: "";
-      position: absolute;
-      top: -10px;
-      left: -10px;
-      right: -10px;
-      bottom: -10px;
-      border-radius: 15px;
-      background: rgba(255, 255, 255, 0.1);
-      z-index: -1;
-      filter: blur(5px);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .card:hover .card-body::before {
-      opacity: 1;
-    }
-
-    .card .btn-light {
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-  </style>
 </head>
 
 <body>
@@ -106,13 +67,19 @@ if ($_SESSION['user_id'] != 'admin') {
           <li>
             <a href="tiket.php" class="nav-link px-3 ">
               <span class="me-2"><i class="bi bi-database-fill-gear"></i></span>
-              <span>Daftar Booking Tiket</span>
+              <span>Daftar Pesanan Tiket</span>
             </a>
           </li>
           <li>
             <a href="pemesanan_tiket.php" class="nav-link px-3">
-              <span class="me-2"><i class="bi bi-gear"></i></span>
+              <span class="me-2"><i class="bi bi-database-fill"></i></span>
               <span>Pemesanan Tiket</span>
+            </a>
+          </li>
+          <li>
+            <a href="book_tiket.php" class="nav-link px-3">
+              <span class="me-2"><i class="bi bi-database-fill"></i></span>
+              <span>Daftar Booking Tiket</span>
             </a>
           </li>
           <li>
@@ -162,7 +129,7 @@ if ($_SESSION['user_id'] != 'admin') {
             </div>
           </div>
         </div>
-        <!-- Card for Products -->
+        <!-- Card for wisata -->
         <div class="col-md-4 mb-4">
           <div class="card text-white bg-success">
             <div class="card-body">
@@ -172,17 +139,17 @@ if ($_SESSION['user_id'] != 'admin') {
             </div>
           </div>
         </div>
-        <!-- Card for Tickets -->
+        <!-- Card for tiket wisata -->
         <div class="col-md-4 mb-4">
           <div class="card text-white bg-danger">
             <div class="card-body">
-              <h5 class="card-title">Total Booking Tiket Wisata</h5>
-              <p class="card-text"><?php echo $total_tickets; ?> Tiket Di Booking</p>
-              <a href="ticket.php" class="btn btn-light">Lihat Detail</a>
+              <h5 class="card-title">Total Tiket Wisata</h5>
+              <p class="card-text"><?php echo $total_tickets; ?> Daftar Tiket yang sudah diBayar</p>
+              <a href="tiket.php" class="btn btn-light">Lihat Detail</a>
             </div>
           </div>
         </div>
-        <!-- Card for Bookings -->
+        <!-- Card for pemesanan tiket -->
         <div class="col-md-4 mb-4">
           <div class="card text-white bg-info">
             <div class="card-body">
@@ -192,10 +159,20 @@ if ($_SESSION['user_id'] != 'admin') {
             </div>
           </div>
         </div>
+        <!-- card for booking tiket -->
+        <div class="col-md-4 mb-4">
+          <div class="card text-white bg-info">
+            <div class="card-body">
+              <h5 class="card-title">Total Booking Tiket</h5>
+              <p class="card-text"><?php echo $total_bookings; ?> Tiket yang di Booking</p>
+              <a href="book_tiket.php" class="btn btn-light">Lihat Detail</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <!-- End of Dashboard content -->
+  <!-- akhir Dashboard  -->
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

@@ -66,15 +66,21 @@ if ($_SESSION['user_id'] != 'admin') {
             </a>
           </li>
           <li>
-            <a href="tiket.php" class="nav-link px-3 active">
+            <a href="tiket.php" class="nav-link px-3 ">
               <span class="me-2"><i class="bi bi-database-fill-gear"></i></span>
-              <span>Daftar Booking Tiket</span>
+              <span>Daftar Pesanan Tiket</span>
             </a>
           </li>
           <li>
             <a href="pemesanan_tiket.php" class="nav-link px-3">
-              <span class="me-2"><i class="bi bi-gear"></i></span>
+              <span class="me-2"><i class="bi bi-database-fill"></i></span>
               <span>Pemesanan Tiket</span>
+            </a>
+          </li>
+          <li>
+            <a href="book_tiket.php" class="nav-link px-3">
+              <span class="me-2"><i class="bi bi-database-fill"></i></span>
+              <span>Daftar Booking Tiket</span>
             </a>
           </li>
           <li>
@@ -92,8 +98,8 @@ if ($_SESSION['user_id'] != 'admin') {
   <div class="container d-flex">
     <div style="width: 250px;height: fit-content"></div>
     <div class="container mt-5 pt-3">
-      <h1 class="mb-4">Daftar Booking Tiket Wisata</h1>
-      <a href="form/create_wisata.php" class="btn btn-primary mb-3">Create Data</a>
+      <h1 class="mb-4">Daftar Pesanan Tiket Wisata</h1>
+      <div style="height: 20px;"> </div>
       <table id="wisataTable" class="display">
         <thead>
           <tr>
@@ -101,7 +107,8 @@ if ($_SESSION['user_id'] != 'admin') {
             <th>Email User</th>
             <th>Tanggal Pemesanan</th>
             <th>Total Pembayaran</th>
-            <th>Time Out</th>
+            <th>Status</th>
+            <th>Selesaikan</th>
           </tr>
         </thead>
         <tbody>
@@ -111,7 +118,8 @@ if ($_SESSION['user_id'] != 'admin') {
           // Mengambil data dari tabel tiket_wisata dan tabel tbl_user
           $sql = "SELECT tiket_wisata.*, tbl_user.email 
           FROM tiket_wisata 
-          JOIN tbl_user ON tiket_wisata.id_users = tbl_user.id";
+          JOIN tbl_user ON tiket_wisata.id_users = tbl_user.id
+          WHERE tiket_wisata.status != 'On Progress'";
 
           $result = $conn->query($sql);
 
@@ -122,11 +130,13 @@ if ($_SESSION['user_id'] != 'admin') {
               echo "<td>" . $row["email"] . "</td>";
               echo "<td>" . formatTanggal($row['tanggal_pemesanan']) . "</td>";
               echo "<td>" . formatRupiah($row['total_pembayaran']) . "</td>";
-              echo "<td><a href='../../controller/timeout_pesanan.php?id=" . $row["id_transaksi"] . "' class='btn btn-danger' onclick='return confirm(\"Apakah Anda ingin Time Out pesanan ini?\")'>Time Out</a></td>";
+              echo "<td>" . $row['status'] . "</td>";
+              echo "<td><a href='../../controller/timeout_pesanan.php?id=" . $row["id_transaksi"] . "' class='btn btn-danger' onclick='return confirm(\"Apakah Anda ingin Menghapus pesanan ini?\")'>Hapus</a></td>";
               echo "</tr>";
             }
           } else {
             echo "<tr>
+            <td colspan='1'>Tidak ada data.</td>
             <td colspan='1'>Tidak ada data.</td>
             <td colspan='1'>Tidak ada data.</td>
             <td colspan='1'>Tidak ada data.</td>
