@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         echo "<script>
             alert('Username atau Password Salah !');
+            window.location.href = '../model/user/form/login.php';
           </script>";
     exit();
     }
