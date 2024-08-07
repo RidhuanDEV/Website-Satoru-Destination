@@ -95,7 +95,7 @@ $conn->close();
           <input type="password" class="form-control" id="password" name="password" placeholder="Kosongkan Jika tidak ingin di Ubah">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
-        <a href="user.php" class="btn btn-secondary">Cancel</a>
+        <a href="../user.php" class="btn btn-secondary">Cancel</a>
       </form>
     </div>
   </div>

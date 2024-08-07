@@ -129,20 +129,20 @@ if ($_SESSION['user_id'] != 'admin') {
               echo "<td>" . $row["nama"] . "</td>";
               echo "<td>" . $row["email"] . "</td>";
               echo "<td>" . '*********' . "</td>";
-              echo "<td><a href='form/update_user.php?id=" . $row["id"] . "' class='btn btn-success'>Update</a></td>";
-              echo "<td><a href='../../controller/delete_user.php?id=" . $row["id"] . "' class='btn btn-danger'>Delete</a></td>";
+              echo "<td><a href='form/update_user.php?id=" . $row["id"] . "' class='btn btn-success' onclick='return confirm(\"Apakah Anda yakin ingin meng-Update User?\");'>Update</a></td>";
+              echo "<td><a href='../../controller/delete_user.php?id=" . $row["id"] . "' class='btn btn-danger'onclick='return confirm(\"Apakah Anda yakin ingin meng-Hapus User?\");'>Delete</a></td>";
 
               echo "</tr>";
             }
           } else {
             echo "<tr>
-                <td colspan='1'>Tidak ada data.</td>
-                <td colspan='1'>Tidak ada data.</td>
-                <td colspan='1'>Tidak ada data.</td>
-                <td colspan='1'>Tidak ada data.</td>
-                <td colspan='1'>Tidak ada data.</td>
-                <td colspan='1'>Tidak ada data.</td>
-                </tr>";
+            <td colspan='6' class='text-center'>Tidak ada data.</td>
+            <td colspan='0' class='d-none'></td>
+            <td colspan='0' class='d-none'></td>
+            <td colspan='0' class='d-none'></td>
+            <td colspan='0' class='d-none'></td>
+            <td colspan='0' class='d-none'></td>
+            </tr>";
           }
 
           $conn->close();

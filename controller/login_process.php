@@ -13,9 +13,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Login successful
         $row = $result->fetch_assoc();
         $_SESSION['user_id'] = $row['id'];
-        header("Location: ../index.php");
+        echo "<script>
+            alert('Selamat Datang di SATORU Destination');
+            window.location.href = '../index.php';
+          </script>";
+          exit();
     } else {
-        echo "Invalid email or password";
+        echo "<script>
+            alert('Username atau Password Salah !');
+          </script>";
+    exit();
     }
 }
 

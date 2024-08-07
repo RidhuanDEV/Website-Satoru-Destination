@@ -12,9 +12,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($result->num_rows > 0) {
         // Admin login successful
         $_SESSION['user_id'] = 'admin';
-        header("Location: ../model/admin/index.php");
+        echo "<script>
+            alert('Selamat Datang Admin');
+            window.location.href = '../model/admin/index.php';
+          </script>";
+          exit();
     } else {
-        echo "Invalid username or password";
+        echo "<script>
+            alert('Username atau Password Salah !');
+          </script>";
+    exit();
     }
 }
 

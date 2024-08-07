@@ -66,8 +66,8 @@ if ($_SESSION['user_id'] != 'admin') {
             </a>
           </li>
           <li>
-            <a href="tiket.php" class="nav-link px-3 ">
-              <span class="me-2"><i class="bi bi-database-fill-gear"></i></span>
+            <a href="tiket.php" class="nav-link px-3 active">
+              <span class="me-2"><i class="bi bi-database-fill-gear active"></i></span>
               <span>Daftar Pesanan Tiket</span>
             </a>
           </li>
@@ -136,12 +136,12 @@ if ($_SESSION['user_id'] != 'admin') {
             }
           } else {
             echo "<tr>
-            <td colspan='1'>Tidak ada data.</td>
-            <td colspan='1'>Tidak ada data.</td>
-            <td colspan='1'>Tidak ada data.</td>
-            <td colspan='1'>Tidak ada data.</td>
-            <td colspan='1'>Tidak ada data.</td>
-            <td colspan='1'>Tidak ada data.</td>
+            <td colspan='6' class='text-center'>Tidak ada data.</td>
+            <td colspan='0' class='d-none'></td>
+            <td colspan='0' class='d-none'></td>
+            <td colspan='0' class='d-none'></td>
+            <td colspan='0' class='d-none'></td>
+            <td colspan='0' class='d-none'></td>
             </tr>";
           }
 

@@ -102,18 +102,21 @@ if ($_SESSION['user_id'] != 'admin') {
     // Ambil total dari setiap tabel
     $sql_users = "SELECT COUNT(*) AS total_users FROM tbl_user";
     $sql_products = "SELECT COUNT(*) AS total_products FROM tbl_wisata";
-    $sql_tickets = "SELECT COUNT(*) AS total_tickets FROM tiket_wisata";
+    $sql_tickets = "SELECT COUNT(*) AS total_tickets FROM tiket_wisata WHERE status != 'On Progress' ";
     $sql_bookings = "SELECT COUNT(*) AS total_bookings FROM test_wisata";
+    $sql_pesanan = "SELECT COUNT(*) AS total_pesanan FROM tiket_wisata WHERE status = 'On Progress'";
 
     $result_users = $conn->query($sql_users);
     $result_products = $conn->query($sql_products);
     $result_tickets = $conn->query($sql_tickets);
     $result_bookings = $conn->query($sql_bookings);
+    $result_pesanan = $conn->query($sql_pesanan);
 
     $total_users = $result_users->fetch_assoc()['total_users'];
     $total_products = $result_products->fetch_assoc()['total_products'];
     $total_tickets = $result_tickets->fetch_assoc()['total_tickets'];
     $total_bookings = $result_bookings->fetch_assoc()['total_bookings'];
+    $total_pesanan = $result_pesanan->fetch_assoc()['total_pesanan'];
 
     $conn->close();
     ?>
@@ -154,7 +157,7 @@ if ($_SESSION['user_id'] != 'admin') {
           <div class="card text-white bg-info">
             <div class="card-body">
               <h5 class="card-title">Total Pemesanan Tiket</h5>
-              <p class="card-text"><?php echo $total_bookings; ?> Pemesanan</p>
+              <p class="card-text"><?php echo $total_pesanan; ?> Pemesanan</p>
               <a href="pemesanan_tiket.php" class="btn btn-light">Lihat Detail</a>
             </div>
           </div>

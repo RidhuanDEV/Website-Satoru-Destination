@@ -15,9 +15,11 @@ include 'koneksi.php';
 
 if (isset($_GET['id'])) {
   $id = $_GET['id'];
-  $sql = "DELETE FROM tbl_user WHERE id=$id";
+  $sql_DeleteUser = "DELETE FROM tbl_user WHERE id=$id";
+  $sql_deletePesanan = "DELETE FROM test_wisata WHERE id_users=$id";
+  $sql_deleteTiket = "DELETE FROM tiket_wisata WHERE id_users=$id";
 
-  if ($conn->query($sql) === TRUE) {
+  if ($conn->query($sql_deletePesanan) && $conn->query($sql_deleteTiket) && $conn->query($sql_DeleteUser) === TRUE) {
     echo "<script>
             alert('User Berhasil di Hapus !');
             window.location.href = '../model/admin/user.php';

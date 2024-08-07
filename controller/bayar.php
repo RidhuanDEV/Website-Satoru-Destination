@@ -31,10 +31,6 @@ try {
 
     $data = $result->fetch_assoc();
 
-    // Debugging: tampilkan data yang diambil
-    echo "<pre>";
-    print_r($data);
-    echo "</pre>";
 
     // Menyimpan data ke tabel tiket_wisata
     $sql_insert = "INSERT INTO tiket_wisata (id_transaksi,id_wisata, id_users, pelayanan, hari, peserta, total_pembayaran, tanggal_pemesanan,status) 
