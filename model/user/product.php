@@ -102,7 +102,7 @@
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                if ($row["diskon"] == 'true') {
+                if ($row["diskon"] == 1) {
                     $discounted_price = $row["harga"] * 0.8;
                     $original_price = number_format($row["harga"], 0, ',', '.');
                     $discount_label = '<span class="badge bg-success">Discount 20%</span>';
@@ -126,7 +126,7 @@
                               </div>
                               <div class="d-md-block">';
 
-                if ($row["diskon"] == 'true') {
+                if ($row["diskon"] == 1) {
                     echo '
                   <p class="card-text text-decoration-line-through">
                       <small class="text-body-secondary">

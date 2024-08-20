@@ -59,12 +59,27 @@ if ($row["diskon"] == 'true') {
                 <input type="hidden" id="hargaTiket" name="hargaTiket" value="<?php echo $row['harga']; ?>" data-discount="<?php echo $row['diskon']; ?>">
                 <input type="hidden" id="id_wisata" name="id_wisata" value="<?php echo $id_wisata; ?>">
                 <div class="mb-3">
-                    <label for="pelayanan" class="form-label">Pelayanan</label>
-                    <select class="form-select" id="pelayanan" name="pelayanan" onchange="hitungTotalPembayaran()">
-                        <option value="Standar">Standar</option>
-                        <option value="VIP">VIP</option>
-                    </select>
+                    <label class="form-label">Pelayanan</label><br>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="penginapan" name="penginapan" value="200000" onchange="hitungTotalPembayaran()">
+                        <label class="form-check-label" for="penginapan">
+                            Penginapan (Rp. 200.000)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="penerbangan" name="penerbangan" value="300000" onchange="hitungTotalPembayaran()">
+                        <label class="form-check-label" for="penerbangan">
+                            Penerbangan (Rp. 300.000)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="makan_minum" name="makan_minum" value="100000" onchange="hitungTotalPembayaran()">
+                        <label class="form-check-label" for="makan_minum">
+                            Makan dan Minum (Rp. 100.000)
+                        </label>
+                    </div>
                 </div>
+
                 <div class="mb-3">
                     <label for="hari" class="form-label">Berapa Hari</label>
                     <input type="number" class="form-control" id="hari" name="hari" min="1" required oninput="hitungTotalPembayaran()">

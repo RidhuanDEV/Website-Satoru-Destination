@@ -141,7 +141,7 @@
                       $nama = $wisata[$i]['nama'];
                       $deskripsi = $wisata[$i]['deskripsi'];
                       $foto =  $wisata[$i]["foto"];
-                      if ($wisata[$i]["diskon"] == 'true') {
+                      if ($wisata[$i]["diskon"] == 1) {
                           $discounted_price = $wisata[$i]["harga"] * 0.8;
                           $original_price = number_format($wisata[$i]["harga"], 0, ',', '.');
                           $discount_label = '<span class="badge bg-success">Discount 20%</span>';
@@ -169,7 +169,7 @@
                                       </div>
                                       <div class="d-md-block">';
                                   if (isset($wisata[$i])){
-                                    if ($wisata[$i]["diskon"] == 'true') {
+                                    if ($wisata[$i]["diskon"] == 1) {
                                         echo '
                                         <p class="card-text">
                                             <small class="text-body-secondary">

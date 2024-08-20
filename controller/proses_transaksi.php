@@ -10,10 +10,14 @@ if (!isset($_SESSION['user_id'])) {
 
 // Mengambil data dari form dan menyanitasi input
 $id_wisata = isset($_POST['id_wisata']) ? $conn->real_escape_string($_POST['id_wisata']) : '';
-$pelayanan = isset($_POST['pelayanan']) ? $conn->real_escape_string($_POST['pelayanan']) : '';
 $hari = isset($_POST['hari']) ? (int)$_POST['hari'] : 0;
 $peserta = isset($_POST['peserta']) ? (int)$_POST['peserta'] : 0;
 $id_user = isset($_SESSION['user_id']) ? (int)$_SESSION['user_id'] : 0;
+
+// Mengambil nilai pelayanan tambahan
+$penginapan = isset($_POST['penginapan']) ? (float)$_POST['penginapan'] : 0;
+$penerbangan = isset($_POST['penerbangan']) ? (float)$_POST['penerbangan'] : 0;
+$makanMinum = isset($_POST['makan_minum']) ? (float)$_POST['makan_minum'] : 0;
 
 // Validasi input tidak boleh nilai minus atau nol
 if ($hari <= 0 || $peserta <= 0) {
@@ -47,17 +51,30 @@ if ($diskon === 'true') {
     $harga_tiket = $harga_tiket * 0.8;
 }
 
-// Menambahkan faktor multiplier untuk pelayanan VIP
-if ($pelayanan === 'VIP') {
-    $harga_tiket *= 1.5;
-}
-
-// Menghitung total pembayaran
+// Menghitung total pembayaran tanpa pelayanan tambahan
 $total_pembayaran = $harga_tiket * $hari * $peserta;
 
+// Menambahkan biaya pelayanan tambahan
+$total_pembayaran += ($penginapan + $penerbangan + $makanMinum) * $hari * $peserta;
+
+// Menyiapkan string untuk kolom pelayanan
+$pelayanan = [];
+if ($penginapan > 0) {
+    $pelayanan[] = "Penginapan";
+}
+if ($penerbangan > 0) {
+    $pelayanan[] = "Penerbangan";
+}
+if ($makanMinum > 0) {
+    $pelayanan[] = "Makan dan Minum";
+}
+
+// Menggabungkan pelayanan menjadi string
+$pelayanan_str = implode(", ", $pelayanan);
+
 // Menyimpan data ke tabel test_wisata
-$sql = "INSERT INTO test_wisata (id_wisata, id_users, pelayanan, hari, peserta, total_pembayaran) 
-        VALUES ('$id_wisata', '$id_user', '$pelayanan', '$hari', '$peserta', '$total_pembayaran')";
+$sql = "INSERT INTO test_wisata (id_wisata, id_users, hari, peserta, total_pembayaran, pelayanan) 
+        VALUES ('$id_wisata', '$id_user', '$hari', '$peserta', '$total_pembayaran', '$pelayanan_str')";
 
 if ($conn->query($sql) === TRUE) {
     echo "<script>
@@ -70,3 +87,4 @@ if ($conn->query($sql) === TRUE) {
 
 // Menutup koneksi
 $conn->close();
+?>
